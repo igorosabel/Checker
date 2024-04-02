@@ -5,6 +5,11 @@ export interface LoginData {
   pass: string | null;
 }
 
+export interface LoginValidation {
+  name: boolean;
+  pass: boolean;
+}
+
 export interface UserInterface {
   id: number | null;
   name: string | null;

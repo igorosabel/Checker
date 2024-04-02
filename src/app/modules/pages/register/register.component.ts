@@ -127,7 +127,24 @@ export default class RegisterComponent {
             this.us.checkinTypeList = [];
             this.us.saveLogin();
             this.router.navigate(['/home']);
-          } else {
+          }
+          if (result.status === 'error-email') {
+            this.ds.alert({
+              title: 'Error',
+              content:
+                'El email introducido ya está en uso. ¿Has olvidado tu usuario o contraseña?',
+              ok: 'Continuar',
+            });
+          }
+          if (result.status === 'error-name') {
+            this.ds.alert({
+              title: 'Error',
+              content:
+                'El usuario introducido ya está en uso. ¿Has olvidado tu usuario o contraseña?',
+              ok: 'Continuar',
+            });
+          }
+          if (result.status === 'error') {
             this.ds.alert({
               title: 'Error',
               content: 'Ocurrió un error al registrarte.',
