@@ -44,6 +44,12 @@ import HeaderComponent from '@shared/components/header/header.component';
   styleUrl: './login.component.scss',
 })
 export default class LoginComponent {
+  as: ApiService = inject(ApiService);
+  us: UserService = inject(UserService);
+  cms: ClassMapperService = inject(ClassMapperService);
+  ds: DialogService = inject(DialogService);
+  router: Router = inject(Router);
+
   loginData: LoginData = {
     name: null,
     pass: null,
@@ -53,12 +59,6 @@ export default class LoginComponent {
     pass: false,
   };
   loading: WritableSignal<boolean> = signal<boolean>(false);
-
-  as: ApiService = inject(ApiService);
-  us: UserService = inject(UserService);
-  cms: ClassMapperService = inject(ClassMapperService);
-  ds: DialogService = inject(DialogService);
-  router: Router = inject(Router);
 
   resetValidation(): void {
     this.validation.name = false;

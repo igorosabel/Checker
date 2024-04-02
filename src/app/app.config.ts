@@ -4,11 +4,12 @@ import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { routes } from './app.routes';
 
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatFormFieldDefaultOptions,
 } from '@angular/material/form-field';
+import { TokenInterceptor } from '@app/interceptors/token.interceptor';
 import { provideCore } from '@modules/core';
 
 const appearance: MatFormFieldDefaultOptions = {
@@ -22,7 +23,7 @@ export const appConfig: ApplicationConfig = {
       useValue: appearance,
     },
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([TokenInterceptor])),
     provideAnimationsAsync(),
     provideCore(),
   ],

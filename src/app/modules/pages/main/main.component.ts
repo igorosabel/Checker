@@ -38,11 +38,11 @@ import HeaderComponent from '@shared/components/header/header.component';
   styleUrl: './main.component.scss',
 })
 export default class MainComponent {
-  opened: boolean = false;
-  sidenav: Signal<MatSidenav> = viewChild.required('sidenav');
-
   us: UserService = inject(UserService);
   router: Router = inject(Router);
+
+  opened: boolean = false;
+  sidenav: Signal<MatSidenav> = viewChild.required('sidenav');
 
   showMenu(): void {
     this.sidenav().toggle();

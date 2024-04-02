@@ -4,7 +4,7 @@ body {
 }
 
 body {
-    background-color: #1e2020;
+    background-color: #282929;
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
@@ -30,6 +30,12 @@ body {
 
 .icon-img {
     width: 24px;
+}
+
+.fab-bottom-right {
+    position: fixed !important;
+    bottom: 16px;
+    right: 16px;
 }
 
 @media screen and (min-width: 1024px) {

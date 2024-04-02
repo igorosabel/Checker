@@ -44,6 +44,12 @@ import { Utils } from '@shared/utils.class';
   styleUrl: './register.component.scss',
 })
 export default class RegisterComponent {
+  as: ApiService = inject(ApiService);
+  us: UserService = inject(UserService);
+  cms: ClassMapperService = inject(ClassMapperService);
+  ds: DialogService = inject(DialogService);
+  router: Router = inject(Router);
+
   registerData: RegisterData = {
     name: null,
     email: null,
@@ -59,12 +65,6 @@ export default class RegisterComponent {
     passMatch: false,
   };
   loading: WritableSignal<boolean> = signal<boolean>(false);
-
-  as: ApiService = inject(ApiService);
-  us: UserService = inject(UserService);
-  cms: ClassMapperService = inject(ClassMapperService);
-  ds: DialogService = inject(DialogService);
-  router: Router = inject(Router);
 
   resetValidation(): void {
     this.validation.name = false;

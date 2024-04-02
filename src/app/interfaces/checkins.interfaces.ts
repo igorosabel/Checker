@@ -7,3 +7,19 @@ export interface CheckinTypeInterface {
   num: number | null;
   lastUsed: string | null;
 }
+
+export interface CheckinTypesResult {
+  status: string;
+  list: CheckinTypeInterface[];
+}
+
+export interface CheckinInterface {
+  id: number | null;
+  idType: number | null;
+  message: string | null;
+  value: number | null;
+  locationLat: number | null;
+  locationLon: number | null;
+  idPhoto: number | null;
+  createdAt: string | null;
+}
