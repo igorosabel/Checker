@@ -5,5 +5,11 @@
         <mat-icon>arrow_back</mat-icon>
     </button>
     }
+    @if (menu()) {
+    <button mat-icon-button
+            (click)="menuClick()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    }
     <span>{{title()}}</span>
 </mat-toolbar>

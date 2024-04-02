@@ -3,7 +3,7 @@
     flex-direction: column;
 
     a {
-        color: #000;
+        color: var(--mat-toolbar-container-text-color);
         text-decoration: none;
         display: block;
         margin-bottom: 16px;

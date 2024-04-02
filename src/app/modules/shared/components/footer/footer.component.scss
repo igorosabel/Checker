@@ -1,0 +1,12 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+
+    .add {
+        position: absolute;
+        left: calc(50% - 28px);
+        bottom: 38px;
+    }
+}

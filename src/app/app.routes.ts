@@ -17,4 +17,19 @@ export const routes: Routes = [
     loadComponent: () => import('@pages/main/main.component'),
     canActivate: [isLoggedGuardFn],
   },
+  {
+    path: 'map',
+    loadComponent: () => import('@pages/map/map.component'),
+    canActivate: [isLoggedGuardFn],
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('@pages/profile/profile.component'),
+    canActivate: [isLoggedGuardFn],
+  },
+  {
+    path: 'checkin-types',
+    loadComponent: () => import('@pages/checkin-types/checkin-types.component'),
+    canActivate: [isLoggedGuardFn],
+  },
 ];

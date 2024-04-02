@@ -4,6 +4,7 @@ body {
 }
 
 body {
+    background-color: #1e2020;
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
@@ -16,6 +17,10 @@ body {
 .card-actions-space-between {
     display: flex;
     justify-content: space-between;
+}
+
+.mat-mdc-card-title {
+    color: var(--mat-toolbar-container-text-color);
 }
 
 .field-error {
