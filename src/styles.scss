@@ -1,4 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.card-center {
+    width: 90%;
+    margin: 5%;
+}
+
+.card-actions-space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.field-error {
+    display: block;
+    color: var(--mat-form-field-error-text-color);
+}
+
+.icon-img {
+    width: 24px;
+}
+
+@media screen and (min-width: 1024px) {
+    .card-center {
+        width: 50%;
+        margin: 5% 25%;
+    }
+}

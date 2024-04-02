@@ -1,0 +1,77 @@
+<app-header title="Checker"
+            back="/" />
+
+<form (ngSubmit)="checkForm()">
+    <mat-card class="card-center">
+        <mat-card-header>
+            <mat-card-title>Registro</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="register-form">
+                <mat-form-field>
+                    <mat-label>Usuario</mat-label>
+                    <input matInput
+                           [(ngModel)]="registerData.name"
+                           name="name"
+                           required>
+                    @if (validation.name) {
+                    <mat-hint class="field-error">El nombre de usuario es obligatorio.</mat-hint>
+                    }
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput
+                           type="email"
+                           [(ngModel)]="registerData.email"
+                           name="email"
+                           required>
+                    @if (validation.email) {
+                    <mat-hint class="field-error">El email es obligatorio.</mat-hint>
+                    }
+                    @if (validation.emailFormat) {
+                    <mat-hint class="field-error">El email introducido no está bien formado.</mat-hint>
+                    }
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput
+                           [(ngModel)]="registerData.pass"
+                           name="pass"
+                           type="password"
+                           required>
+                    @if (validation.pass) {
+                    <mat-hint class="field-error">La contraseña es obligatoria.</mat-hint>
+                    }
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Confirmar contraseña</mat-label>
+                    <input matInput
+                           [(ngModel)]="registerData.conf"
+                           name="conf"
+                           type="password"
+                           required>
+                    @if (validation.conf) {
+                    <mat-hint class="field-error">La confirmación de contraseña es obligatoria.</mat-hint>
+                    }
+                    @if (validation.passMatch) {
+                    <mat-hint class="field-error">Las contraseñas no coinciden.</mat-hint>
+                    }
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button
+                    color="primary"
+                    [disabled]="loading()">
+                @if (loading()) {
+                <img src="/assets/loading.svg"
+                     alt="Cargando..."
+                     class="icon-img">
+                }
+                @else {
+                Continuar
+                }
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</form>

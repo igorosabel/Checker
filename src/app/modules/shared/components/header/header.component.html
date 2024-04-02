@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+    @if (back() !== '') {
+    <button mat-icon-button
+            [routerLink]="back()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    }
+    <span>{{title()}}</span>
+</mat-toolbar>

@@ -1,0 +1,15 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+
+    a {
+        color: #000;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 16px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

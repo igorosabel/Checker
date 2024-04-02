@@ -1,0 +1,32 @@
+<app-header title="Checker" />
+
+<mat-card class="card-center">
+    <mat-card-header>
+        <mat-card-title>Iniciar sesión</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="login-form">
+            <mat-form-field>
+                <mat-label>Usuario</mat-label>
+                <input matInput
+                       [(ngModel)]="loginData.name"
+                       required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Contraseña</mat-label>
+                <input matInput
+                       [(ngModel)]="loginData.pass"
+                       type="password"
+                       required>
+            </mat-form-field>
+            <a routerLink="/register">¿Has olvidado tu contraseña?</a>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="card-actions-space-between">
+        <button mat-raised-button
+                color="primary"
+                routerLink="/register">Registro</button>
+        <button mat-raised-button
+                color="primary">Continuar</button>
+    </mat-card-actions>
+</mat-card>
