@@ -5,10 +5,30 @@
     <mat-card-content>
         <mat-list>
             @if (checkinTypes.length > 0) {
+            @for (ct of checkinTypes; track ct.id) {
             <mat-list-item>
-                <span matListItemTitle>Title</span>
-                <span matListItemLine>Second line</span>
+                <span matListItemTitle>
+                    <mat-icon>{{ct.icon}}</mat-icon>
+                    {{ct.name}}
+                </span>
+                <span matListItemLine>
+                    @if (ct.lastUsed) {
+                    Último uso: {{ct.lastUsed}} -
+                    }
+                    Num: {{ct.num}}
+                    <button mat-icon-button
+                            class="edit-button"
+                            (click)="editCheckinType(ct)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button
+                            class="delete-button"
+                            (click)="deleteCheckinType(ct)">
+                        <mat-icon>delete_forever</mat-icon>
+                    </button>
+                </span>
             </mat-list-item>
+            }
             }
             @else {
             <mat-list-item>
@@ -21,6 +41,62 @@
 
 <button mat-fab
         color="primary"
-        class="fab-bottom-right">
+        class="fab-bottom-right"
+        (click)="addNew()">
     <mat-icon>add</mat-icon>
 </button>
+
+<div class="new-checkin-bg"
+     [ngClass]="{'show': showModal()}">
+    <mat-card class="card-center">
+        <mat-card-header>
+            <mat-card-title>
+                <span>{{modalTitle}}</span>
+                <button mat-icon-button
+                        (click)="closeModal()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="form-row">
+                <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput
+                           [(ngModel)]="selectedCheckinType.name"
+                           name="name"
+                           required>
+                    @if (!checkinTypeValidName) {
+                    <mat-hint class="field-error">El nombre del tipo de Checkin es obligatorio.</mat-hint>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="icon-row">
+                <mat-form-field>
+                    <mat-label>Icono</mat-label>
+                    <input matInput
+                           [(ngModel)]="selectedCheckinType.icon"
+                           name="name"
+                           required>
+                </mat-form-field>
+                <div class="icon-preview">
+                    <mat-icon>
+                        {{selectedCheckinType.icon ? selectedCheckinType.icon : 'disabled_by_default'}}
+                    </mat-icon>
+                </div>
+            </div>
+            <div class="form-row">
+                <mat-slide-toggle [(ngModel)]="selectedCheckinType.hasMessage">¿Tiene mensaje?</mat-slide-toggle>
+            </div>
+            <div class="form-row">
+                <mat-slide-toggle [(ngModel)]="selectedCheckinType.hasValue">¿Tiene valor?</mat-slide-toggle>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button
+                    color="primary"
+                    type="button"
+                    (click)="checkForm()">Continuar</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

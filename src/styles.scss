@@ -19,7 +19,22 @@ body {
     justify-content: space-between;
 }
 
+.mat-mdc-card-header-text {
+    width: 100%;
+}
+
 .mat-mdc-card-title {
+    color: var(--mat-toolbar-container-text-color);
+    display: flex !important;
+
+    span {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+}
+
+.mat-mdc-card-content {
     color: var(--mat-toolbar-container-text-color);
 }
 
