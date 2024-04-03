@@ -12,6 +12,8 @@
                     <input matInput
                            [(ngModel)]="loginData.name"
                            name="name"
+                           autocorrect="off"
+                           autocapitalize="off"
                            required>
                     @if (validation.name) {
                     <mat-hint class="field-error">El nombre de usuario es obligatorio.</mat-hint>
@@ -34,6 +36,7 @@
         <mat-card-actions class="card-actions-space-between">
             <button mat-raised-button
                     color="primary"
+                    type="button"
                     routerLink="/register">Registro</button>
             <button mat-raised-button
                     color="primary"
