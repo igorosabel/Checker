@@ -1,43 +1,20 @@
-import { NgClass } from '@angular/common';
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  Signal,
-  WritableSignal,
-  inject,
-  signal,
-  viewChild,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import {
-  MatButton,
-  MatFabButton,
-  MatIconButton,
-} from '@angular/material/button';
-import {
-  MatCard,
-  MatCardActions,
-  MatCardContent,
-  MatCardHeader,
-  MatCardTitle,
-} from '@angular/material/card';
-import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
+import { Component, OnInit, Signal, inject, viewChild } from '@angular/core';
+import { MatFabButton, MatIconButton } from '@angular/material/button';
+import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
 import {
   MatList,
   MatListItem,
   MatListItemLine,
   MatListItemTitle,
 } from '@angular/material/list';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { CheckinTypesResult } from '@interfaces/checkins.interfaces';
 import { StatusResult } from '@interfaces/interfaces';
 import { CheckinType } from '@model/checkintype.model';
 import { ApiService } from '@services/api.service';
 import { ClassMapperService } from '@services/class-mapper.service';
 import { DialogService } from '@services/dialog.service';
+import CheckinTypeComponent from '@shared/components/checkin-type/checkin-type.component';
 import HeaderComponent from '@shared/components/header/header.component';
 
 @Component({
@@ -45,11 +22,9 @@ import HeaderComponent from '@shared/components/header/header.component';
   standalone: true,
   imports: [
     HeaderComponent,
+    CheckinTypeComponent,
     MatCard,
-    MatCardHeader,
-    MatCardTitle,
     MatCardContent,
-    MatCardActions,
     MatList,
     MatListItem,
     MatListItemTitle,
@@ -57,14 +32,6 @@ import HeaderComponent from '@shared/components/header/header.component';
     MatFabButton,
     MatIconButton,
     MatIcon,
-    NgClass,
-    MatButton,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatHint,
-    MatSlideToggle,
-    FormsModule,
   ],
   templateUrl: './checkin-types.component.html',
   styleUrl: './checkin-types.component.scss',
@@ -75,11 +42,8 @@ export default class CheckinTypesComponent implements OnInit {
   ds: DialogService = inject(DialogService);
 
   checkinTypes: CheckinType[] = [];
-  showModal: WritableSignal<boolean> = signal<boolean>(false);
-  modalTitle: string = '';
-  selectedCheckinType: CheckinType = new CheckinType();
-  checkinTypeValidName: boolean = true;
-  nameBox: Signal<ElementRef> = viewChild.required<ElementRef>('nameBox');
+  ct: Signal<CheckinTypeComponent> =
+    viewChild.required<CheckinTypeComponent>('ct');
 
   ngOnInit(): void {
     this.loadCheckinTypes();
@@ -92,21 +56,15 @@ export default class CheckinTypesComponent implements OnInit {
   }
 
   addNew(): void {
-    this.selectedCheckinType = new CheckinType();
-    this.modalTitle = 'Nuevo tipo de Checkin';
-    this.showModal.set(true);
-    window.setTimeout((): void => {
-      this.nameBox().nativeElement.focus();
-    }, 100);
+    this.ct().load(new CheckinType());
   }
 
   editCheckinType(ct: CheckinType): void {
-    this.selectedCheckinType = ct;
-    this.modalTitle = 'Editar tipo de Checkin';
-    this.showModal.set(true);
-    window.setTimeout((): void => {
-      this.nameBox().nativeElement.focus();
-    }, 100);
+    this.ct().load(ct);
+  }
+
+  checkinTypeSaved(): void {
+    this.loadCheckinTypes();
   }
 
   deleteCheckinType(ct: CheckinType): void {
@@ -145,43 +103,5 @@ export default class CheckinTypesComponent implements OnInit {
         });
       }
     });
-  }
-
-  closeModal(): void {
-    this.showModal.set(false);
-  }
-
-  checkForm(): void {
-    this.checkinTypeValidName = true;
-    if (
-      this.selectedCheckinType.name === null ||
-      this.selectedCheckinType.name === ''
-    ) {
-      this.checkinTypeValidName = false;
-      return;
-    }
-
-    this.as
-      .saveCheckinType(this.selectedCheckinType.toInterface())
-      .subscribe((result: StatusResult): void => {
-        if (result.status === 'ok') {
-          this.ds
-            .alert({
-              title: 'Datos guardados',
-              content: 'Los datos del tipo de Checkin han sido guardados.',
-              ok: 'Continuar',
-            })
-            .subscribe((): void => {
-              this.loadCheckinTypes();
-              this.closeModal();
-            });
-        } else {
-          this.ds.alert({
-            title: 'Error',
-            content: 'Ocurrió un error al guardar el tipo de Checkin.',
-            ok: 'Continuar',
-          });
-        }
-      });
   }
 }

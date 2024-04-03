@@ -1,0 +1,45 @@
+.new-checkin-bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    &.show {
+        display: flex;
+    }
+
+    .form-row {
+        display: flex;
+        margin-bottom: 8px;
+
+        &>mat-form-field {
+            flex: 1;
+        }
+    }
+
+    .icon-row {
+        display: flex;
+
+        &>mat-form-field {
+            flex: 1;
+        }
+
+        .icon-preview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            height: 56px;
+            width: 56px;
+            border: 1px solid #899392;
+            border-radius: 4px;
+            margin-left: 16px;
+        }
+    }
+}
