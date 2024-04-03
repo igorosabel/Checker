@@ -8,7 +8,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './alert-dialog.component.html',
   imports: [MatDialogModule, MatButtonModule],
 })
-export class AlertDialogComponent {
+export default class AlertDialogComponent {
   public title: string = '';
   public content: string = '';
   public ok: string = '';

@@ -20,7 +20,7 @@ import { DialogField } from '@interfaces/interfaces';
     MatButtonModule,
   ],
 })
-export class FormDialogComponent {
+export default class FormDialogComponent {
   public title: string = '';
   public content: string = '';
   public fields: DialogField[] | undefined;

@@ -8,7 +8,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './confirm-dialog.component.html',
   imports: [MatDialogModule, MatButtonModule],
 })
-export class ConfirmDialogComponent {
+export default class ConfirmDialogComponent {
   public title: string = '';
   public content: string = '';
   public ok: string = '';
