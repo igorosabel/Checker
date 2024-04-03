@@ -1,10 +1,13 @@
 import { NgClass } from '@angular/common';
 import {
   Component,
+  ElementRef,
   OnInit,
+  Signal,
   WritableSignal,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -76,6 +79,7 @@ export default class CheckinTypesComponent implements OnInit {
   modalTitle: string = '';
   selectedCheckinType: CheckinType = new CheckinType();
   checkinTypeValidName: boolean = true;
+  nameBox: Signal<ElementRef> = viewChild.required<ElementRef>('nameBox');
 
   ngOnInit(): void {
     this.loadCheckinTypes();
@@ -91,12 +95,18 @@ export default class CheckinTypesComponent implements OnInit {
     this.selectedCheckinType = new CheckinType();
     this.modalTitle = 'Nuevo tipo de Checkin';
     this.showModal.set(true);
+    window.setTimeout((): void => {
+      this.nameBox().nativeElement.focus();
+    }, 100);
   }
 
   editCheckinType(ct: CheckinType): void {
     this.selectedCheckinType = ct;
     this.modalTitle = 'Editar tipo de Checkin';
     this.showModal.set(true);
+    window.setTimeout((): void => {
+      this.nameBox().nativeElement.focus();
+    }, 100);
   }
 
   deleteCheckinType(ct: CheckinType): void {

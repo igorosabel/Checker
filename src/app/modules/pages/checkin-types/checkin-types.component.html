@@ -65,7 +65,8 @@
                     <input matInput
                            [(ngModel)]="selectedCheckinType.name"
                            name="name"
-                           required>
+                           required
+                           #nameBox>
                     @if (!checkinTypeValidName) {
                     <mat-hint class="field-error">El nombre del tipo de Checkin es obligatorio.</mat-hint>
                     }
