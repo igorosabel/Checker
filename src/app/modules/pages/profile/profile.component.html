@@ -37,8 +37,7 @@
                     <input matInput
                            [(ngModel)]="profileData.pass"
                            name="pass"
-                           type="password"
-                           required>
+                           type="password">
                     @if (validation.pass) {
                     <mat-hint class="field-error">La contraseña es obligatoria.</mat-hint>
                     }
@@ -48,8 +47,7 @@
                     <input matInput
                            [(ngModel)]="profileData.conf"
                            name="conf"
-                           type="password"
-                           required>
+                           type="password">
                     @if (validation.conf) {
                     <mat-hint class="field-error">La confirmación de contraseña es obligatoria.</mat-hint>
                     }

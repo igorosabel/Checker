@@ -16,12 +16,9 @@ import {
 } from '@angular/material/card';
 import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
+import { StatusResult } from '@app/interfaces/interfaces';
 import { DialogService } from '@app/services/dialog.service';
-import {
-  LoginResult,
-  RegisterData,
-  RegisterValidation,
-} from '@interfaces/user.interfaces';
+import { RegisterData, RegisterValidation } from '@interfaces/user.interfaces';
 import { ApiService } from '@services/api.service';
 import { UserService } from '@services/user.service';
 import HeaderComponent from '@shared/components/header/header.component';
@@ -110,15 +107,14 @@ export default class ProfileComponent implements OnInit {
     ) {
       this.validation.emailFormat = true;
     }
-    if (!this.profileData.pass) {
+    if (this.profileData.conf && !this.profileData.pass) {
       this.validation.pass = true;
     }
-    if (!this.profileData.conf) {
+    if (this.profileData.pass && !this.profileData.conf) {
       this.validation.conf = true;
     }
     if (
-      this.profileData.pass !== null &&
-      this.profileData.conf !== null &&
+      (this.profileData.pass !== null || this.profileData.conf !== null) &&
       this.profileData.pass !== this.profileData.conf
     ) {
       this.validation.passMatch = true;
@@ -127,13 +123,18 @@ export default class ProfileComponent implements OnInit {
     if (this.checkValidations()) {
       this.loading.set(true);
       this.as
-        .register(this.profileData)
-        .subscribe((result: LoginResult): void => {
+        .updateProfile(this.profileData)
+        .subscribe((result: StatusResult): void => {
           this.loading.set(false);
           if (result.status === 'ok' && this.us.user !== null) {
             this.us.user.name = this.profileData.name;
             this.us.user.email = this.profileData.email;
             this.us.saveLogin();
+            this.ds.alert({
+              title: 'Datos guardados',
+              content: 'Datos del perfil actualizados.',
+              ok: 'Continuar',
+            });
           }
           if (result.status === 'error-email') {
             this.ds.alert({

@@ -54,4 +54,11 @@ export class ApiService {
       {}
     );
   }
+
+  updateProfile(data: RegisterData): Observable<StatusResult> {
+    return this.http.post<StatusResult>(
+      environment.apiUrl + '/update-profile',
+      data
+    );
+  }
 }
