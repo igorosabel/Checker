@@ -1,1 +1,21 @@
-<p>checkin works!</p>
+<div class="new-checkin-bg"
+     [ngClass]="{'show': showModal()}">
+    <mat-card class="card-center">
+        <mat-card-header>
+            <mat-card-title>
+                <span>{{modalTitle}}</span>
+                <button mat-icon-button
+                        (click)="closeModal()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-select>
+                @for (ct of checkinTypeList; track ct.id) {
+                <mat-option [value]="ct.id">{{ct.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-card-content>
+    </mat-card>
+</div>
