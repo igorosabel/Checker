@@ -11,11 +11,81 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-select>
-                @for (ct of checkinTypeList; track ct.id) {
-                <mat-option [value]="ct.id">{{ct.name}}</mat-option>
+            <div class="checkin-form">
+                <mat-form-field>
+                    <mat-label>Tipo de checkin</mat-label>
+                    <mat-select (selectionChange)="updateSelectedCT()"
+                                [(ngModel)]="selectedCheckin.idType"
+                                required>
+                        <mat-option [value]="null">Elige un tipo</mat-option>
+                        @for (ct of checkinTypeList; track ct.id) {
+                        <mat-option [value]="ct.id">{{ct.name}}</mat-option>
+                        }
+                    </mat-select>
+                    @if (validateCheckinType) {
+                    <mat-hint class="field-error">El tipo de checkin es obligatorio.</mat-hint>
+                    }
+                </mat-form-field>
+                @if (selectedCT !== null && selectedCT.hasValue){
+                <mat-form-field>
+                    <mat-label>Valor</mat-label>
+                    <input matInput
+                           [(ngModel)]="selectedCheckin.value"
+                           name="value"
+                           type="number">
+                </mat-form-field>
                 }
-            </mat-select>
+                @if (selectedCT !== null && selectedCT.hasMessage){
+                <mat-form-field>
+                    <mat-label>Mensaje</mat-label>
+                    <textarea matInput
+                              [(ngModel)]="selectedCheckin.message"
+                              name="message"></textarea>
+                </mat-form-field>
+                }
+                @if (selectedCheckin.photo) {
+                <div class="photo-row">
+                    <img [src]="selectedCheckin.photo"
+                         alt="Foto del checkin">
+                    <button mat-icon-button
+                            (click)="removePhoto()">
+                        <mat-icon>delete_forever</mat-icon>
+                    </button>
+                </div>
+                }
+            </div>
         </mat-card-content>
+        <mat-card-actions>
+            <div class="checkin-actions">
+                <div class="checkin-actions-icons">
+                    <button mat-icon-button
+                            (click)="getLocation()">
+                        <mat-icon>{{location() ? 'location_on' : 'location_off'}}</mat-icon>
+                    </button>
+                    <input type="file"
+                           name="photo-file"
+                           id="photo-file"
+                           accept="image/png, image/gif, image/jpeg"
+                           (change)="onPhotoChange($event)">
+                    <button mat-icon-button
+                            (click)="addPhoto()">
+                        <mat-icon>add_a_photo</mat-icon>
+                    </button>
+                </div>
+                <button mat-raised-button
+                        color="primary"
+                        [disabled]="loading()"
+                        (click)="checkForm()">
+                    @if (loading()) {
+                    <img src="/assets/loading.svg"
+                         alt="Cargando..."
+                         class="icon-img">
+                    }
+                    @else {
+                    Continuar
+                    }
+                </button>
+            </div>
+        </mat-card-actions>
     </mat-card>
 </div>

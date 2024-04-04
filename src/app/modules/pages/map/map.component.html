@@ -1,11 +1,16 @@
 <mat-sidenav-container class="container"
                        [hasBackdrop]="true">
-    <app-menu #menu />
+    <mat-sidenav #sidenav
+                 mode="over"
+                 [(opened)]="opened">
+        <app-menu #menu />
+    </mat-sidenav>
 
     <mat-sidenav-content>
         <app-header title="Checker"
                     [menu]="true"
                     (menuClicked)="showMenu()" />
-        <app-footer selected="map" />
+        <app-footer selected="map"
+                    (saved)="checkinSaved()" />
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,4 +1,4 @@
-import { Component, Signal, inject, viewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import {
   MatActionList,
@@ -7,7 +7,6 @@ import {
   MatListItemTitle,
   MatNavList,
 } from '@angular/material/list';
-import { MatSidenav } from '@angular/material/sidenav';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '@services/user.service';
 import HeaderComponent from '@shared/components/header/header.component';
@@ -16,7 +15,6 @@ import HeaderComponent from '@shared/components/header/header.component';
   selector: 'app-menu',
   standalone: true,
   imports: [
-    MatSidenav,
     HeaderComponent,
     MatNavList,
     MatListItem,
@@ -32,9 +30,6 @@ import HeaderComponent from '@shared/components/header/header.component';
 export default class MenuComponent {
   us: UserService = inject(UserService);
   router: Router = inject(Router);
-
-  opened: boolean = false;
-  sidenav: Signal<MatSidenav> = viewChild.required('sidenav');
 
   logout(): void {
     this.us.logout();

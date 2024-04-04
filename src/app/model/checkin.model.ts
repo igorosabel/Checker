@@ -1,7 +1,11 @@
 import { CheckinInterface } from '@interfaces/checkins.interfaces';
 import { Utils } from '@shared/utils.class';
+import { CheckinType } from './checkintype.model';
 
 export class Checkin {
+  photo: string | null = null;
+  ct: CheckinType | null = null;
+
   constructor(
     public id: number | null = null,
     public idType: number | null = null,
@@ -36,6 +40,7 @@ export class Checkin {
       locationLon: this.locationLon,
       idPhoto: this.idPhoto,
       createdAt: this.createdAt,
+      photo: this.photo,
     };
   }
 }

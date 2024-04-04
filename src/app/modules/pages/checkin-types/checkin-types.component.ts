@@ -8,6 +8,7 @@ import {
   MatListItemLine,
   MatListItemTitle,
 } from '@angular/material/list';
+import { UserService } from '@app/services/user.service';
 import { CheckinTypesResult } from '@interfaces/checkins.interfaces';
 import { StatusResult } from '@interfaces/interfaces';
 import { CheckinType } from '@model/checkintype.model';
@@ -37,6 +38,7 @@ import HeaderComponent from '@shared/components/header/header.component';
   styleUrl: './checkin-types.component.scss',
 })
 export default class CheckinTypesComponent implements OnInit {
+  us: UserService = inject(UserService);
   as: ApiService = inject(ApiService);
   cms: ClassMapperService = inject(ClassMapperService);
   ds: DialogService = inject(DialogService);
@@ -52,6 +54,8 @@ export default class CheckinTypesComponent implements OnInit {
   loadCheckinTypes(): void {
     this.as.getCheckinTypes().subscribe((result: CheckinTypesResult): void => {
       this.checkinTypes = this.cms.getCheckinTypes(result.list);
+      this.us.checkinTypeList = this.checkinTypes;
+      this.us.saveLogin();
     });
   }
 

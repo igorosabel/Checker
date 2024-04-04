@@ -2,8 +2,10 @@ import { NgClass } from '@angular/common';
 import {
   Component,
   InputSignal,
+  OutputEmitterRef,
   Signal,
   input,
+  output,
   viewChild,
 } from '@angular/core';
 import { MatFabButton, MatIconButton } from '@angular/material/button';
@@ -31,8 +33,13 @@ import CheckinComponent from '@shared/components/checkin/checkin.component';
 export default class FooterComponent {
   selected: InputSignal<string> = input.required<string>();
   c: Signal<CheckinComponent> = viewChild.required<CheckinComponent>('c');
+  saved: OutputEmitterRef<void> = output<void>();
 
   addCheckin(): void {
     this.c().load(new Checkin());
+  }
+
+  checkinSaved(): void {
+    this.saved.emit();
   }
 }

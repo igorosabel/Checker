@@ -1,11 +1,47 @@
 <mat-sidenav-container class="container"
                        [hasBackdrop]="true">
-    <app-menu #menu />
+    <mat-sidenav #sidenav
+                 mode="over"
+                 [(opened)]="opened">
+        <app-menu #menu />
+    </mat-sidenav>
 
     <mat-sidenav-content>
         <app-header title="Checker"
                     [menu]="true"
                     (menuClicked)="showMenu()" />
-        <app-footer selected="home" />
+
+        <mat-card class="card-center">
+            <mat-card-content>
+                <mat-action-list>
+                    @if (checkins.length > 0) {
+                    @for (c of checkins; track c.id) {
+                    <button mat-list-item
+                            (click)="openDetail(c)">
+                        <span matListItemTitle>
+                            <mat-icon>{{c.ct?.icon}}</mat-icon>
+                            {{c.ct?.name}}
+                        </span>
+                        <span matListItemLine>
+                            {{c.createdAt}} -
+                        </span>
+                        <span class="detail-button"
+                              matListItemMeta>
+                            <mat-icon>chevron_right</mat-icon>
+                        </span>
+                    </button>
+                    }
+                    }
+                    @else {
+                    <mat-list-item>
+                        <span matListItemTitle>Todavía no has creado ningún tipo de Checkin.</span>
+                    </mat-list-item>
+                    }
+                </mat-action-list>
+            </mat-card-content>
+        </mat-card>
+
+        <app-footer selected="home"
+                    (saved)="checkinSaved()" />
     </mat-sidenav-content>
 </mat-sidenav-container>

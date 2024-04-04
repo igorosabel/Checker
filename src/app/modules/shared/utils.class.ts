@@ -36,4 +36,35 @@ export class Utils {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   }
+
+  static getDateFromString(str: string | null): Date | null {
+    if (str === null) {
+      return null;
+    }
+    let day: number = 0;
+    let month: number = 0;
+    let year: number = 0;
+    let hour: number = 0;
+    let minutes: number = 0;
+    const seconds: number = 0;
+
+    if (str.includes(' ')) {
+      const strParts: string[] = str.split(' ');
+      const dateParts: string[] = strParts[0].split('/');
+      const hourParts: string[] = strParts[1].split(':');
+      day = parseInt(dateParts[0]);
+      month = parseInt(dateParts[1]) - 1;
+      year = parseInt(dateParts[2]);
+      hour = parseInt(hourParts[0]);
+      minutes = parseInt(hourParts[1]);
+    } else {
+      const dateParts: string[] = str.split('/');
+      day = parseInt(dateParts[0]);
+      month = parseInt(dateParts[1]) - 1;
+      year = parseInt(dateParts[2]);
+    }
+
+    const date: Date = new Date(year, month, day, hour, minutes, seconds);
+    return date;
+  }
 }

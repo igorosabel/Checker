@@ -22,4 +22,10 @@ export interface CheckinInterface {
   locationLon: number | null;
   idPhoto: number | null;
   createdAt: string | null;
+  photo?: string | null;
+}
+
+export interface CheckinsResult {
+  status: string;
+  list: CheckinInterface[];
 }

@@ -17,4 +17,5 @@
         <mat-icon [ngClass]="{'selected': selected() === 'map'}">room</mat-icon>
     </button>
 </mat-toolbar>
-<app-checkin #c />
+<app-checkin #c
+             (saved)="checkinSaved()" />

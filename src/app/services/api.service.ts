@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { StatusResult } from '@app/interfaces/interfaces';
 import { environment } from '@env/environment';
 import {
+  CheckinInterface,
   CheckinTypeInterface,
   CheckinTypesResult,
+  CheckinsResult,
 } from '@interfaces/checkins.interfaces';
+import { StatusResult } from '@interfaces/interfaces';
 import {
   LoginData,
   LoginResult,
@@ -48,10 +50,17 @@ export class ApiService {
     );
   }
 
-  getCheckins(): Observable<LoginResult> {
-    return this.http.post<LoginResult>(
+  getCheckins(): Observable<CheckinsResult> {
+    return this.http.post<CheckinsResult>(
       environment.apiUrl + '/get-checkins',
       {}
+    );
+  }
+
+  saveCheckin(c: CheckinInterface): Observable<StatusResult> {
+    return this.http.post<StatusResult>(
+      environment.apiUrl + '/save-checkin',
+      c
     );
   }
 

@@ -1,5 +1,6 @@
 import { Component, Signal, viewChild } from '@angular/core';
 import {
+  MatSidenav,
   MatSidenavContainer,
   MatSidenavContent,
 } from '@angular/material/sidenav';
@@ -12,6 +13,7 @@ import MenuComponent from '@shared/components/menu/menu.component';
   standalone: true,
   imports: [
     MatSidenavContainer,
+    MatSidenav,
     MatSidenavContent,
     HeaderComponent,
     FooterComponent,
@@ -21,9 +23,12 @@ import MenuComponent from '@shared/components/menu/menu.component';
   styleUrl: './map.component.scss',
 })
 export default class MapComponent {
-  menu: Signal<MenuComponent> = viewChild.required<MenuComponent>('menu');
+  opened: boolean = false;
+  sidenav: Signal<MatSidenav> = viewChild.required('sidenav');
 
   showMenu(): void {
-    this.menu().sidenav().toggle();
+    this.sidenav().toggle();
   }
+
+  checkinSaved(): void {}
 }
