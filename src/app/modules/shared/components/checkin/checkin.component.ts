@@ -111,6 +111,9 @@ export default class CheckinComponent implements OnInit {
     } else {
       this.modalTitle = 'Checkin';
     }
+    if (this.location()) {
+      this.getCurrentLocation();
+    }
     this.showModal.set(true);
   }
 
@@ -129,6 +132,10 @@ export default class CheckinComponent implements OnInit {
 
   getLocation(): void {
     this.location.update((value: boolean): boolean => !value);
+    this.getCurrentLocation();
+  }
+
+  getCurrentLocation(): void {
     if (this.location()) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
