@@ -28,4 +28,13 @@ export interface CheckinInterface {
 export interface CheckinsResult {
   status: string;
   list: CheckinInterface[];
+  pages: number;
+  total: number;
+}
+
+export interface CheckinsFiltersInterface {
+  idType: number | null;
+  start: string | null;
+  end: string | null;
+  page: number;
 }

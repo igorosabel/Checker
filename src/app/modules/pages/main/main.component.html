@@ -12,6 +12,15 @@
                     (menuClicked)="showMenu()" />
 
         <mat-card class="card-center">
+            <mat-card-header>
+                <mat-card-title>
+                    <span>Checkins</span>
+                    <button mat-icon-button
+                            (click)="showFilters()">
+                        <mat-icon>filter_list</mat-icon>
+                    </button>
+                </mat-card-title>
+            </mat-card-header>
             <mat-card-content>
                 <mat-action-list>
                     @if (checkins.length > 0) {
@@ -23,7 +32,7 @@
                             {{c.ct?.name}}
                         </span>
                         <span matListItemLine>
-                            {{c.createdAt}} -
+                            {{c.createdAt}}
                         </span>
                         <span class="detail-button"
                               matListItemMeta>
@@ -37,11 +46,25 @@
                         <span matListItemTitle>Todavía no has creado ningún tipo de Checkin.</span>
                     </mat-list-item>
                     }
+                    @if (checkins.length < total)
+                      {
+                      <button
+                      mat-list-item
+                      (click)="nextPage()">
+                        Cargar más
+                        </button>
+                        }
                 </mat-action-list>
             </mat-card-content>
+            <mat-card-actions align="end">
+                {{checkins.length}} / {{total}}
+            </mat-card-actions>
         </mat-card>
 
         <app-footer selected="home"
                     (saved)="checkinSaved()" />
     </mat-sidenav-content>
 </mat-sidenav-container>
+
+<app-checkins-filters #filters
+                      (filtersChanged)="filtersChanged($event)" />

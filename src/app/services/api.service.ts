@@ -5,6 +5,7 @@ import {
   CheckinInterface,
   CheckinTypeInterface,
   CheckinTypesResult,
+  CheckinsFiltersInterface,
   CheckinsResult,
 } from '@interfaces/checkins.interfaces';
 import { StatusResult } from '@interfaces/interfaces';
@@ -50,10 +51,10 @@ export class ApiService {
     );
   }
 
-  getCheckins(): Observable<CheckinsResult> {
+  getCheckins(filters: CheckinsFiltersInterface): Observable<CheckinsResult> {
     return this.http.post<CheckinsResult>(
       environment.apiUrl + '/get-checkins',
-      {}
+      filters
     );
   }
 
