@@ -113,7 +113,9 @@ export default class MainComponent implements OnInit {
     this.sidenav().toggle();
   }
 
-  checkinSaved(): void {
+  reloadCheckins(): void {
+    this.checkinFilters.page = 1;
+    this.checkins = [];
     this.loadCheckins();
   }
 
@@ -131,8 +133,6 @@ export default class MainComponent implements OnInit {
     this.checkinFilters.idType = newFilters.idType;
     this.checkinFilters.start = newFilters.start;
     this.checkinFilters.end = newFilters.end;
-    this.checkinFilters.page = 1;
-    this.checkins = [];
-    this.loadCheckins();
+    this.reloadCheckins();
   }
 }
