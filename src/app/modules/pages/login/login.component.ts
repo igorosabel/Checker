@@ -1,4 +1,10 @@
-import { Component, WritableSignal, inject, signal } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  WritableSignal,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import {
@@ -43,7 +49,7 @@ import HeaderComponent from '@shared/components/header/header.component';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export default class LoginComponent {
+export default class LoginComponent implements OnInit {
   as: ApiService = inject(ApiService);
   us: UserService = inject(UserService);
   cms: ClassMapperService = inject(ClassMapperService);
@@ -59,6 +65,13 @@ export default class LoginComponent {
     pass: false,
   };
   loading: WritableSignal<boolean> = signal<boolean>(false);
+
+  ngOnInit(): void {
+    this.us.loadLogin();
+    if (this.us.user) {
+      this.router.navigate(['/home']);
+    }
+  }
 
   resetValidation(): void {
     this.validation.name = false;
