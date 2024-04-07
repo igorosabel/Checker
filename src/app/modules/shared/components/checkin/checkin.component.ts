@@ -106,6 +106,7 @@ export default class CheckinComponent implements OnInit {
   load(): void {
     this.selectedCheckin = new Checkin();
     this.selectedCheckin.idType = this.checkinTypeList[0].id;
+    this.selectedCT = this.checkinTypeList[0];
     if (this.location()) {
       this.getCurrentLocation();
     }
