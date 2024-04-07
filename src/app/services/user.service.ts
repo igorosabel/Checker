@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, WritableSignal, signal } from '@angular/core';
 import { CheckinTypeInterface } from '@app/interfaces/checkins.interfaces';
 import { LoginResult } from '@interfaces/user.interfaces';
 import { CheckinType } from '@model/checkintype.model';
@@ -9,7 +9,7 @@ import { ClassMapperService } from '@services/class-mapper.service';
 export class UserService {
   logged: boolean = false;
   user: User | null = null;
-  checkinTypeList: CheckinType[] = [];
+  checkinTypeList: WritableSignal<CheckinType[]> = signal<CheckinType[]>([]);
 
   constructor(private cms: ClassMapperService) {}
 
@@ -26,7 +26,9 @@ export class UserService {
     }
     this.logged = true;
     this.user = this.cms.getUser(loginObj.user);
-    this.checkinTypeList = this.cms.getCheckinTypes(loginObj.checkinTypeList);
+    this.checkinTypeList.set(
+      this.cms.getCheckinTypes(loginObj.checkinTypeList)
+    );
   }
 
   saveLogin(): void {
@@ -36,7 +38,7 @@ export class UserService {
     const loginObj: LoginResult = {
       status: 'ok',
       user: this.user.toInterface(),
-      checkinTypeList: this.checkinTypeList.map(
+      checkinTypeList: this.checkinTypeList().map(
         (ct: CheckinType): CheckinTypeInterface => {
           return ct.toInterface();
         }
@@ -48,7 +50,7 @@ export class UserService {
   logout(): void {
     this.logged = false;
     this.user = null;
-    this.checkinTypeList = [];
+    this.checkinTypeList.set([]);
     localStorage.removeItem('login');
   }
 }

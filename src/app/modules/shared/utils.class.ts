@@ -67,4 +67,17 @@ export class Utils {
     const date: Date = new Date(year, month, day, hour, minutes, seconds);
     return date;
   }
+
+  static getStringFromDate(d: Date | null): string | null {
+    if (d === null) {
+      return null;
+    }
+    const dia: string = d.getDate().toString().padStart(2, '0');
+    const mes: string = (d.getMonth() + 1).toString().padStart(2, '0');
+    const año: number = d.getFullYear();
+    const hora: string = d.getHours().toString().padStart(2, '0');
+    const minutos: string = d.getMinutes().toString().padStart(2, '0');
+
+    return `${dia}/${mes}/${año} ${hora}:${minutos}`;
+  }
 }

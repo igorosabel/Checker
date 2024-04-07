@@ -99,8 +99,8 @@ export default class LoginComponent implements OnInit {
         if (result.status === 'ok') {
           this.us.logged = true;
           this.us.user = this.cms.getUser(result.user);
-          this.us.checkinTypeList = this.cms.getCheckinTypes(
-            result.checkinTypeList
+          this.us.checkinTypeList.set(
+            this.cms.getCheckinTypes(result.checkinTypeList)
           );
           this.us.saveLogin();
           this.router.navigate(['/home']);

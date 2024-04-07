@@ -75,7 +75,7 @@ export default class CheckinsFiltersComponent implements OnInit {
     output<CheckinsFiltersInterface>();
 
   ngOnInit(): void {
-    this.checkinTypeList = this.us.checkinTypeList;
+    this.checkinTypeList = this.us.checkinTypeList();
   }
 
   open(): void {

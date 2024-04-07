@@ -12,7 +12,6 @@ import { MatFabButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
-import { Checkin } from '@app/model/checkin.model';
 import CheckinComponent from '@shared/components/checkin/checkin.component';
 
 @Component({
@@ -36,7 +35,7 @@ export default class FooterComponent {
   saved: OutputEmitterRef<void> = output<void>();
 
   addCheckin(): void {
-    this.c().load(new Checkin());
+    this.c().load();
   }
 
   checkinSaved(): void {

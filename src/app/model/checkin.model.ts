@@ -1,3 +1,4 @@
+import { environment } from '@env/environment';
 import { CheckinInterface } from '@interfaces/checkins.interfaces';
 import { Utils } from '@shared/utils.class';
 import { CheckinType } from './checkintype.model';
@@ -16,6 +17,10 @@ export class Checkin {
     public idPhoto: number | null = null,
     public createdAt: string | null = null
   ) {}
+
+  get map(): string {
+    return `https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=300&height=200&center=lonlat:${this.locationLon},${this.locationLat}&zoom=15.1&marker=lonlat:${this.locationLon},${this.locationLat};color:%23ff0000;size:medium;text:A&apiKey=${environment.geoapifyApiKey}`;
+  }
 
   fromInterface(c: CheckinInterface): Checkin {
     this.id = c.id;

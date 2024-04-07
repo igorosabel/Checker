@@ -67,7 +67,6 @@ export default class CheckinComponent implements OnInit {
   validateCheckinType: boolean = false;
 
   showModal: WritableSignal<boolean> = signal<boolean>(false);
-  modalTitle: string = '';
   selectedCheckin: Checkin = new Checkin();
   location: WritableSignal<boolean> = signal<boolean>(false);
   loading: WritableSignal<boolean> = signal<boolean>(false);
@@ -75,7 +74,7 @@ export default class CheckinComponent implements OnInit {
   saved: OutputEmitterRef<void> = output();
 
   ngOnInit(): void {
-    this.checkinTypeList = this.checkinTypeOrder(this.us.checkinTypeList);
+    this.checkinTypeList = this.checkinTypeOrder(this.us.checkinTypeList());
   }
 
   checkinTypeOrder(ctList: CheckinType[]): CheckinType[] {
@@ -104,13 +103,9 @@ export default class CheckinComponent implements OnInit {
     });
   }
 
-  load(c: Checkin): void {
-    this.selectedCheckin = c;
-    if (c.id === null) {
-      this.modalTitle = 'Nuevo Checkin';
-    } else {
-      this.modalTitle = 'Checkin';
-    }
+  load(): void {
+    this.selectedCheckin = new Checkin();
+    this.selectedCheckin.idType = this.checkinTypeList[0].id;
     if (this.location()) {
       this.getCurrentLocation();
     }
@@ -207,6 +202,20 @@ export default class CheckinComponent implements OnInit {
       .subscribe((result: StatusResult): void => {
         this.loading.set(false);
         if (result.status === 'ok') {
+          this.us.checkinTypeList.update(
+            (value: CheckinType[]): CheckinType[] => {
+              const ind: number = value.findIndex(
+                (ct: CheckinType): boolean => {
+                  return ct.id === this.selectedCheckin.idType;
+                }
+              );
+              value[ind].num =
+                value[ind].num === null ? 1 : (value[ind].num ?? 0) + 1;
+
+              value[ind].lastUsed = Utils.getStringFromDate(new Date());
+              return value;
+            }
+          );
           this.ds
             .alert({
               title: 'Datos guardados',

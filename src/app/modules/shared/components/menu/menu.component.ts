@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import {
   MatActionList,
@@ -27,9 +27,16 @@ import HeaderComponent from '@shared/components/header/header.component';
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
 })
-export default class MenuComponent {
+export default class MenuComponent implements OnInit {
   us: UserService = inject(UserService);
   router: Router = inject(Router);
+  username: string | null = null;
+
+  ngOnInit(): void {
+    if (this.us.user) {
+      this.username = this.us.user.name;
+    }
+  }
 
   logout(): void {
     this.us.logout();

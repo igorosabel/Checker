@@ -29,6 +29,7 @@ import { CheckinType } from '@model/checkintype.model';
 import { ApiService } from '@services/api.service';
 import { ClassMapperService } from '@services/class-mapper.service';
 import { UserService } from '@services/user.service';
+import CheckinDetailComponent from '@shared/components/checkin-detail/checkin-detail.component';
 import CheckinsFiltersComponent from '@shared/components/checkins-filters/checkins-filters.component';
 import FooterComponent from '@shared/components/footer/footer.component';
 import HeaderComponent from '@shared/components/header/header.component';
@@ -57,6 +58,7 @@ import MenuComponent from '@shared/components/menu/menu.component';
     FooterComponent,
     MenuComponent,
     CheckinsFiltersComponent,
+    CheckinDetailComponent,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
@@ -82,8 +84,11 @@ export default class MainComponent implements OnInit {
   };
   total: number = 0;
 
+  detail: Signal<CheckinDetailComponent> =
+    viewChild.required<CheckinDetailComponent>('detail');
+
   ngOnInit(): void {
-    this.checkinTypes = this.us.checkinTypeList;
+    this.checkinTypes = this.us.checkinTypeList();
     this.loadCheckins();
   }
 
@@ -121,6 +126,7 @@ export default class MainComponent implements OnInit {
 
   openDetail(c: Checkin): void {
     console.log(c);
+    this.detail().load(c);
   }
 
   nextPage(): void {
@@ -129,7 +135,6 @@ export default class MainComponent implements OnInit {
   }
 
   filtersChanged(newFilters: CheckinsFiltersInterface): void {
-    console.log(newFilters);
     this.checkinFilters.idType = newFilters.idType;
     this.checkinFilters.start = newFilters.start;
     this.checkinFilters.end = newFilters.end;

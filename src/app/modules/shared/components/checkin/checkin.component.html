@@ -3,7 +3,7 @@
     <mat-card class="card-center">
         <mat-card-header>
             <mat-card-title>
-                <span>{{modalTitle}}</span>
+                <span>Nuevo Checkin</span>
                 <button mat-icon-button
                         (click)="closeModal()">
                     <mat-icon>close</mat-icon>
@@ -17,7 +17,6 @@
                     <mat-select (selectionChange)="updateSelectedCT()"
                                 [(ngModel)]="selectedCheckin.idType"
                                 required>
-                        <mat-option [value]="null">Elige un tipo</mat-option>
                         @for (ct of checkinTypeList; track ct.id) {
                         <mat-option [value]="ct.id">{{ct.name}}</mat-option>
                         }

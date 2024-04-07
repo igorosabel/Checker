@@ -14,6 +14,7 @@
                            name="name"
                            autocorrect="off"
                            autocapitalize="off"
+                           autocomplete="username"
                            required>
                     @if (validation.name) {
                     <mat-hint class="field-error">El nombre de usuario es obligatorio.</mat-hint>
@@ -25,6 +26,7 @@
                            [(ngModel)]="loginData.pass"
                            name="pass"
                            type="password"
+                           autocomplete="current-password"
                            required>
                     @if (validation.pass) {
                     <mat-hint class="field-error">La contraseña es obligatoria.</mat-hint>

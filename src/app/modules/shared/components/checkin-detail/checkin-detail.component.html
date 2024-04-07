@@ -1,1 +1,33 @@
-<p>checkin-detail works!</p>
+<div class="checkin-detail-bg"
+     [ngClass]="{'show': showModal()}">
+    <mat-card class="card-center">
+        <mat-card-header>
+            <mat-card-title>
+                <span>{{selectedCT?.name}}</span>
+                <button mat-icon-button
+                        (click)="closeModal()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-card-title>
+            <mat-card-subtitle>{{selectedCheckin.createdAt}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+        @if (selectedCT?.hasValue) {
+        <div class="message">Valor: {{selectedCheckin.value}}</div>
+        }
+        @if (selectedCT?.hasMessage) {
+        <div class="message">{{selectedCheckin.message}}</div>
+        }
+        @if (selectedCheckin.locationLat !== null && selectedCheckin.locationLon !== null) {
+        <img [src]="selectedCheckin.map"
+             alt="">
+        }
+        <mat-card-actions>
+            <button mat-icon-button
+                    (click)="closeModal()">
+                <mat-icon>delete_forever</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

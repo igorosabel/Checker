@@ -54,7 +54,7 @@ export default class CheckinTypesComponent implements OnInit {
   loadCheckinTypes(): void {
     this.as.getCheckinTypes().subscribe((result: CheckinTypesResult): void => {
       this.checkinTypes = this.cms.getCheckinTypes(result.list);
-      this.us.checkinTypeList = this.checkinTypes;
+      this.us.checkinTypeList.set(this.checkinTypes);
       this.us.saveLogin();
     });
   }
