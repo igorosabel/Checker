@@ -1,46 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="50px"
-   width="30px"
-   version="1.1"
-   id="_x34_"
-   viewBox="0 0 512 512"
-   xml:space="preserve"
-   sodipodi:docname="pin.svg"
-   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"><defs
-   id="defs1" /><sodipodi:namedview
-   id="namedview1"
-   pagecolor="#505050"
-   bordercolor="#ffffff"
-   borderopacity="1"
-   inkscape:showpageshadow="0"
-   inkscape:pageopacity="0"
-   inkscape:pagecheckerboard="1"
-   inkscape:deskcolor="#505050"
-   inkscape:zoom="16.26"
-   inkscape:cx="14.9754"
-   inkscape:cy="25"
-   inkscape:window-width="1920"
-   inkscape:window-height="1009"
-   inkscape:window-x="-8"
-   inkscape:window-y="-8"
-   inkscape:window-maximized="1"
-   inkscape:current-layer="_x34_" />
-<g
-   id="g1">
-	<path
-   style="fill:#ff0000;"
-   d="M424.269,212.061c0,58.586-23.759,111.638-62.128,150.007L213.684,510.451L212.134,512   L62.275,362.141c-7.231-7.157-13.872-14.905-19.996-23.095C15.715,303.703,0,259.726,0,212.061   c0-51.06,18.077-97.914,48.182-134.512c8.78-10.773,18.668-20.586,29.366-29.367C114.147,18.077,161.074,0,212.134,0   c40.655,0,78.582,11.437,110.826,31.211c28.555,17.487,52.609,41.541,70.097,70.097   C412.832,133.552,424.269,171.478,424.269,212.061z"
-   id="path1" />
-</g>
-<ellipse
-   style="fill:#ffffff;stroke-width:24.8565"
-   id="path2"
-   cx="214.1554"
-   cy="215.0652"
-   rx="174.27019"
-   ry="184.20665" /></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="50px" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+
+	<path d="m424.27 212.06c0 58.586-23.759 111.64-62.128 150.01l-148.46 148.38-1.55 1.549-149.86-149.86c-7.231-7.157-13.872-14.905-19.996-23.095-26.564-35.343-42.279-79.32-42.279-126.98 0-51.06 18.077-97.914 48.182-134.51 8.78-10.773 18.668-20.586 29.366-29.367 36.599-30.105 83.526-48.182 134.59-48.182 40.655 0 78.582 11.437 110.83 31.211 28.555 17.487 52.609 41.541 70.097 70.097 19.775 32.244 31.212 70.17 31.212 110.75z" fill="#f00"/>
+
+<ellipse cx="214.16" cy="215.07" rx="174.27" ry="184.21" fill="#fff" stroke-width="24.856"/></svg>
