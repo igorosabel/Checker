@@ -10,7 +10,67 @@
         <app-header title="Checker"
                     [menu]="true"
                     (menuClicked)="showMenu()" />
+
+        <div id="map"
+             class="map"></div>
+
+        <mat-card class="card-center">
+            <mat-card-header>
+                <mat-card-title>
+                    <span>Checkins</span>
+                    <button mat-icon-button
+                            (click)="showFilters()">
+                        <mat-icon>filter_list</mat-icon>
+                    </button>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-action-list>
+                    @if (checkins.length > 0) {
+                    @for (c of checkins; track c.id) {
+                    <button mat-list-item
+                            (click)="openDetail(c)">
+                        <span matListItemTitle>
+                            {{c.letter}}
+                            <mat-icon>{{c.ct?.icon}}</mat-icon>
+                            {{c.ct?.name}}
+                        </span>
+                        <span matListItemLine>
+                            {{c.createdAt}}
+                        </span>
+                        <span class="detail-button"
+                              matListItemMeta>
+                            <mat-icon>chevron_right</mat-icon>
+                        </span>
+                    </button>
+                    }
+                    }
+                    @else {
+                    <mat-list-item>
+                        <span matListItemTitle>Todavía no has creado ningún tipo de Checkin.</span>
+                    </mat-list-item>
+                    }
+                    @if (checkins.length < total)
+                      {
+                      <button
+                      mat-list-item
+                      (click)="nextPage()">
+                        Cargar más
+                        </button>
+                        }
+                </mat-action-list>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                {{checkins.length}} / {{total}}
+            </mat-card-actions>
+        </mat-card>
+
         <app-footer selected="map"
-                    (saved)="checkinSaved()" />
+                    (saved)="reloadCheckins()" />
     </mat-sidenav-content>
 </mat-sidenav-container>
+
+<app-checkins-filters #filters
+                      (filtersChanged)="filtersChanged($event)" />
+<app-checkin-detail #detail
+                    (checkinDeleted)="reloadCheckins()" />

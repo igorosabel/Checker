@@ -125,7 +125,6 @@ export default class MainComponent implements OnInit {
   }
 
   openDetail(c: Checkin): void {
-    console.log(c);
     this.detail().load(c);
   }
 

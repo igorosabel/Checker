@@ -6,6 +6,7 @@ import { CheckinType } from './checkintype.model';
 export class Checkin {
   photo: string | null = null;
   ct: CheckinType | null = null;
+  letter: string | null = null;
 
   constructor(
     public id: number | null = null,
@@ -19,7 +20,20 @@ export class Checkin {
   ) {}
 
   get map(): string {
-    return `https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=300&height=200&center=lonlat:${this.locationLon},${this.locationLat}&zoom=15.1&marker=lonlat:${this.locationLon},${this.locationLat};color:%23ff0000;size:medium;text:A&apiKey=${environment.geoapifyApiKey}`;
+    return `https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=600&height=400&center=lonlat:${
+      this.locationLon
+    },${this.locationLat}&zoom=15.1&marker=lonlat:${this.locationLon},${
+      this.locationLat
+    };color:%23ff0000;size:medium;text:${
+      this.letter !== null ? this.letter : 'A'
+    }&apiKey=${environment.geoapifyApiKey}`;
+  }
+
+  get photoUrl(): string | null {
+    if (this.idPhoto === null) {
+      return null;
+    }
+    return `${environment.photosUrl}${this.idPhoto}.webp`;
   }
 
   fromInterface(c: CheckinInterface): Checkin {

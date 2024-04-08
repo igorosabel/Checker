@@ -65,6 +65,13 @@ export class ApiService {
     );
   }
 
+  deleteCheckin(id: number): Observable<StatusResult> {
+    return this.http.post<StatusResult>(
+      environment.apiUrl + '/delete-checkin',
+      { id }
+    );
+  }
+
   updateProfile(data: RegisterData): Observable<StatusResult> {
     return this.http.post<StatusResult>(
       environment.apiUrl + '/update-profile',
