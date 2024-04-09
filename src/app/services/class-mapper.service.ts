@@ -12,8 +12,6 @@ import { User } from '@model/user.model';
   providedIn: 'root',
 })
 export class ClassMapperService {
-  constructor() {}
-
   getUser(u: UserInterface): User {
     return new User().fromInterface(u);
   }

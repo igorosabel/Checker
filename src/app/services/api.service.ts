@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from '@env/environment';
 import {
   CheckinInterface,
@@ -20,7 +20,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient) {}
+  http: HttpClient = inject(HttpClient);
 
   register(data: RegisterData): Observable<LoginResult> {
     return this.http.post<LoginResult>(environment.apiUrl + '/register', data);

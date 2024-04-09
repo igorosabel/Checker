@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogOptions } from '@interfaces/interfaces';
 import AlertDialogComponent from '@shared/components/dialogs/alert-dialog/alert-dialog.component';
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class DialogService {
-  constructor(private dialog: MatDialog) {}
+  dialog: MatDialog = inject(MatDialog);
 
   public confirm(options: DialogOptions): Observable<boolean> {
     const dialogRef: MatDialogRef<ConfirmDialogComponent> = this.dialog.open(

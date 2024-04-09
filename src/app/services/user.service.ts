@@ -1,4 +1,4 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import { CheckinTypeInterface } from '@app/interfaces/checkins.interfaces';
 import { LoginResult } from '@interfaces/user.interfaces';
 import { CheckinType } from '@model/checkintype.model';
@@ -7,11 +7,11 @@ import { ClassMapperService } from '@services/class-mapper.service';
 
 @Injectable()
 export class UserService {
+  cms: ClassMapperService = inject(ClassMapperService);
+
   logged: boolean = false;
   user: User | null = null;
   checkinTypeList: WritableSignal<CheckinType[]> = signal<CheckinType[]>([]);
-
-  constructor(private cms: ClassMapperService) {}
 
   loadLogin(): void {
     const loginStr: string | null = localStorage.getItem('login');

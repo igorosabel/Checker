@@ -5,7 +5,7 @@ import { ClassMapperService } from '@services/class-mapper.service';
 import { DialogService } from '@services/dialog.service';
 import { UserService } from '@services/user.service';
 
-export function provideCore(): Provider[] {
+export default function provideCore(): Provider[] {
   return [
     ApiService,
     AuthService,

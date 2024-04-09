@@ -12,8 +12,9 @@ import {
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatFormFieldDefaultOptions,
 } from '@angular/material/form-field';
-import { TokenInterceptor } from '@app/interceptors/token.interceptor';
-import { provideCore } from '@modules/core';
+import ResponseInterceptor from '@app/interceptors/response.interceptor';
+import TokenInterceptor from '@app/interceptors/token.interceptor';
+import provideCore from '@modules/core';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline',
@@ -36,7 +37,9 @@ export const appConfig: ApplicationConfig = {
       useValue: 'es-ES',
     },
     provideRouter(routes),
-    provideHttpClient(withInterceptors([TokenInterceptor])),
+    provideHttpClient(
+      withInterceptors([TokenInterceptor, ResponseInterceptor])
+    ),
     provideAnimationsAsync(),
     provideCore(),
   ],
