@@ -39,7 +39,7 @@ import { FeatureLike } from 'ol/Feature';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import { Coordinate } from 'ol/coordinate';
-import { Geometry, Point } from 'ol/geom';
+import { Point } from 'ol/geom';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import { fromLonLat } from 'ol/proj';
@@ -88,7 +88,7 @@ export default class MapComponent implements OnInit {
     center: [0, 0],
     zoom: 11,
   });
-  markerLayer: VectorLayer<VectorSource<Feature<Geometry>>> = new VectorLayer({
+  markerLayer = new VectorLayer({
     source: new VectorSource(),
   });
 
@@ -188,7 +188,7 @@ export default class MapComponent implements OnInit {
     // Estilo del marcador
     const markerStyle = new Style({
       image: new Icon({
-        src: 'assets/pin.svg', // Ruta de la imagen de la chincheta
+        src: '/img/pin.svg', // Ruta de la imagen de la chincheta
         scale: 1, // Escala del marcador
       }),
       text: new Text({
