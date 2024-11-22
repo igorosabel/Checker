@@ -13,7 +13,6 @@ import HeaderComponent from '@shared/components/header/header.component';
 
 @Component({
   selector: 'app-menu',
-  standalone: true,
   imports: [
     HeaderComponent,
     MatNavList,

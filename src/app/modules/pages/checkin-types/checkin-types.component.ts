@@ -20,7 +20,6 @@ import HeaderComponent from '@shared/components/header/header.component';
 
 @Component({
   selector: 'app-checkin-types',
-  standalone: true,
   imports: [
     HeaderComponent,
     CheckinTypeComponent,

@@ -30,7 +30,6 @@ import HeaderComponent from '@shared/components/header/header.component';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
   imports: [
     HeaderComponent,
     MatCard,

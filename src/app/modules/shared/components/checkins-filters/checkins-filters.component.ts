@@ -34,7 +34,6 @@ import { CustomDateAdapter } from '@shared/custom-date-adapter';
 
 @Component({
   selector: 'app-checkins-filters',
-  standalone: true,
   imports: [
     NgClass,
     MatCard,

@@ -27,7 +27,6 @@ import { CheckinType } from '@model/checkintype.model';
 
 @Component({
   selector: 'app-checkin-detail',
-  standalone: true,
   imports: [
     NgClass,
     MatCard,

@@ -26,7 +26,6 @@ import { Utils } from '@shared/utils.class';
 
 @Component({
   selector: 'app-profile',
-  standalone: true,
   imports: [
     HeaderComponent,
     MatCard,

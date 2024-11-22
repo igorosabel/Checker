@@ -16,7 +16,6 @@ import CheckinComponent from '@shared/components/checkin/checkin.component';
 
 @Component({
   selector: 'app-footer',
-  standalone: true,
   imports: [
     MatToolbar,
     MatIconButton,

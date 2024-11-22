@@ -52,7 +52,6 @@ import Text from 'ol/style/Text';
 
 @Component({
   selector: 'app-map',
-  standalone: true,
   imports: [
     MatSidenavContainer,
     MatSidenav,

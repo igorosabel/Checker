@@ -35,7 +35,6 @@ import { Utils } from '@shared/utils.class';
 
 @Component({
   selector: 'app-checkin',
-  standalone: true,
   imports: [
     NgClass,
     MatCard,

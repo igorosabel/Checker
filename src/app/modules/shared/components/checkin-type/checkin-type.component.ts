@@ -30,7 +30,6 @@ import { DialogService } from '@services/dialog.service';
 
 @Component({
   selector: 'app-checkin-type',
-  standalone: true,
   imports: [
     NgClass,
     MatCard,

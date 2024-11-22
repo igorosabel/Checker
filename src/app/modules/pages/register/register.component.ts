@@ -25,7 +25,6 @@ import { Utils } from '@shared/utils.class';
 
 @Component({
   selector: 'app-register',
-  standalone: true,
   imports: [
     HeaderComponent,
     MatCard,

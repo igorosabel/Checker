@@ -37,7 +37,6 @@ import MenuComponent from '@shared/components/menu/menu.component';
 
 @Component({
   selector: 'app-main',
-  standalone: true,
   imports: [
     MatSidenavContainer,
     MatSidenav,
