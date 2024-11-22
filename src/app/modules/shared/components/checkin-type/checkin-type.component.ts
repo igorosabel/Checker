@@ -25,8 +25,8 @@ import { MatInput } from '@angular/material/input';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { StatusResult } from '@interfaces/interfaces';
 import { CheckinType } from '@model/checkintype.model';
+import { DialogService } from '@osumi/angular-tools';
 import { ApiService } from '@services/api.service';
-import { DialogService } from '@services/dialog.service';
 
 @Component({
   selector: 'app-checkin-type',

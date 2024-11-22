@@ -29,9 +29,9 @@ import { StatusResult } from '@app/interfaces/interfaces';
 import { ApiService } from '@app/services/api.service';
 import { Checkin } from '@model/checkin.model';
 import { CheckinType } from '@model/checkintype.model';
-import { DialogService } from '@services/dialog.service';
+import { DialogService } from '@osumi/angular-tools';
+import { getDate, getDateFromString } from '@osumi/tools';
 import { UserService } from '@services/user.service';
-import { Utils } from '@shared/utils.class';
 
 @Component({
   selector: 'app-checkin',
@@ -92,11 +92,13 @@ export default class CheckinComponent implements OnInit {
         }
       }
 
-      const dateA: Date | null = Utils.getDateFromString(a.lastUsed);
-      const dateB: Date | null = Utils.getDateFromString(b.lastUsed);
+      if (a.lastUsed !== null && b.lastUsed !== null) {
+        const dateA: Date | null = getDateFromString(a.lastUsed);
+        const dateB: Date | null = getDateFromString(b.lastUsed);
 
-      if (dateA !== null && dateB !== null) {
-        return dateB.getTime() - dateA.getTime();
+        if (dateA !== null && dateB !== null) {
+          return dateB.getTime() - dateA.getTime();
+        }
       }
       return 1;
     });
@@ -212,7 +214,10 @@ export default class CheckinComponent implements OnInit {
               value[ind].num =
                 value[ind].num === null ? 1 : (value[ind].num ?? 0) + 1;
 
-              value[ind].lastUsed = Utils.getStringFromDate(new Date());
+              value[ind].lastUsed = getDate({
+                date: new Date(),
+                withHours: true,
+              });
               return value;
             }
           );

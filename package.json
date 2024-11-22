@@ -22,6 +22,8 @@
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
     "@auth0/angular-jwt": "^5.2.0",
+    "@osumi/angular-tools": "^1.0.8",
+    "@osumi/tools": "^1.5.0",
     "ol": "^9.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

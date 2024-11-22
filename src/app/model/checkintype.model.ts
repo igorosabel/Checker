@@ -1,5 +1,5 @@
-import { Utils } from '@app/modules/shared/utils.class';
 import { CheckinTypeInterface } from '@interfaces/checkins.interfaces';
+import { urldecode, urlencode } from '@osumi/tools';
 
 export class CheckinType {
   constructor(
@@ -14,8 +14,8 @@ export class CheckinType {
 
   fromInterface(ct: CheckinTypeInterface): CheckinType {
     this.id = ct.id;
-    this.name = Utils.urldecode(ct.name);
-    this.icon = Utils.urldecode(ct.icon);
+    this.name = urldecode(ct.name);
+    this.icon = urldecode(ct.icon);
     this.hasMessage = ct.hasMessage;
     this.hasValue = ct.hasValue;
     this.num = ct.num;
@@ -27,8 +27,8 @@ export class CheckinType {
   toInterface(): CheckinTypeInterface {
     return {
       id: this.id,
-      name: Utils.urlencode(this.name),
-      icon: Utils.urlencode(this.icon),
+      name: urlencode(this.name),
+      icon: urlencode(this.icon),
       hasMessage: this.hasMessage,
       hasValue: this.hasValue,
       num: this.num,

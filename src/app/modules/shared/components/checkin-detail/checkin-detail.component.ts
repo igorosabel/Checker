@@ -20,10 +20,10 @@ import {
 import { MatIcon } from '@angular/material/icon';
 import { StatusResult } from '@app/interfaces/interfaces';
 import { ApiService } from '@app/services/api.service';
-import { DialogService } from '@app/services/dialog.service';
 import { UserService } from '@app/services/user.service';
 import { Checkin } from '@model/checkin.model';
 import { CheckinType } from '@model/checkintype.model';
+import { DialogService } from '@osumi/angular-tools';
 
 @Component({
   selector: 'app-checkin-detail',

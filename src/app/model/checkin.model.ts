@@ -1,6 +1,6 @@
 import { environment } from '@env/environment';
 import { CheckinInterface } from '@interfaces/checkins.interfaces';
-import { Utils } from '@shared/utils.class';
+import { urldecode, urlencode } from '@osumi/tools';
 import { CheckinType } from './checkintype.model';
 
 export class Checkin {
@@ -39,7 +39,7 @@ export class Checkin {
   fromInterface(c: CheckinInterface): Checkin {
     this.id = c.id;
     this.idType = c.idType;
-    this.message = Utils.urldecode(c.message);
+    this.message = urldecode(c.message);
     this.value = c.value;
     this.locationLat = c.locationLat;
     this.locationLon = c.locationLon;
@@ -53,7 +53,7 @@ export class Checkin {
     return {
       id: this.id,
       idType: this.idType,
-      message: Utils.urlencode(this.message),
+      message: urlencode(this.message),
       value: this.value,
       locationLat: this.locationLat,
       locationLon: this.locationLon,

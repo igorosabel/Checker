@@ -12,9 +12,9 @@ import { UserService } from '@app/services/user.service';
 import { CheckinTypesResult } from '@interfaces/checkins.interfaces';
 import { StatusResult } from '@interfaces/interfaces';
 import { CheckinType } from '@model/checkintype.model';
+import { DialogService } from '@osumi/angular-tools';
 import { ApiService } from '@services/api.service';
 import { ClassMapperService } from '@services/class-mapper.service';
-import { DialogService } from '@services/dialog.service';
 import CheckinTypeComponent from '@shared/components/checkin-type/checkin-type.component';
 import HeaderComponent from '@shared/components/header/header.component';
 

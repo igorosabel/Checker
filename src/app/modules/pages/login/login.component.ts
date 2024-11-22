@@ -22,9 +22,9 @@ import {
   LoginResult,
   LoginValidation,
 } from '@interfaces/user.interfaces';
+import { DialogService } from '@osumi/angular-tools';
 import { ApiService } from '@services/api.service';
 import { ClassMapperService } from '@services/class-mapper.service';
-import { DialogService } from '@services/dialog.service';
 import { UserService } from '@services/user.service';
 import HeaderComponent from '@shared/components/header/header.component';
 

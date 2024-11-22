@@ -13,15 +13,15 @@ import { MatInput } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { ApiService } from '@app/services/api.service';
 import { ClassMapperService } from '@app/services/class-mapper.service';
-import { DialogService } from '@app/services/dialog.service';
 import { UserService } from '@app/services/user.service';
 import {
   LoginResult,
   RegisterData,
   RegisterValidation,
 } from '@interfaces/user.interfaces';
+import { DialogService } from '@osumi/angular-tools';
+import { validateEmail } from '@osumi/tools';
 import HeaderComponent from '@shared/components/header/header.component';
-import { Utils } from '@shared/utils.class';
 
 @Component({
   selector: 'app-register',
@@ -96,7 +96,7 @@ export default class RegisterComponent {
     }
     if (
       this.registerData.email !== null &&
-      !Utils.validateEmail(this.registerData.email)
+      !validateEmail(this.registerData.email)
     ) {
       this.validation.emailFormat = true;
     }

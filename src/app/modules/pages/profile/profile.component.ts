@@ -17,12 +17,12 @@ import {
 import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { StatusResult } from '@app/interfaces/interfaces';
-import { DialogService } from '@app/services/dialog.service';
 import { RegisterData, RegisterValidation } from '@interfaces/user.interfaces';
+import { DialogService } from '@osumi/angular-tools';
+import { validateEmail } from '@osumi/tools';
 import { ApiService } from '@services/api.service';
 import { UserService } from '@services/user.service';
 import HeaderComponent from '@shared/components/header/header.component';
-import { Utils } from '@shared/utils.class';
 
 @Component({
   selector: 'app-profile',
@@ -102,7 +102,7 @@ export default class ProfileComponent implements OnInit {
     }
     if (
       this.profileData.email !== null &&
-      !Utils.validateEmail(this.profileData.email)
+      !validateEmail(this.profileData.email)
     ) {
       this.validation.emailFormat = true;
     }
