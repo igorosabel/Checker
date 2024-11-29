@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   Component,
   InputSignal,
@@ -22,7 +21,6 @@ import CheckinComponent from '@shared/components/checkin/checkin.component';
     MatFabButton,
     MatIcon,
     RouterLink,
-    NgClass,
     CheckinComponent,
   ],
   templateUrl: './footer.component.html',

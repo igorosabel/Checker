@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -31,7 +30,6 @@ import { ApiService } from '@services/api.service';
 @Component({
   selector: 'app-checkin-type',
   imports: [
-    NgClass,
     MatCard,
     MatCardHeader,
     MatCardTitle,

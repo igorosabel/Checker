@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -28,7 +27,6 @@ import { DialogService } from '@osumi/angular-tools';
 @Component({
   selector: 'app-checkin-detail',
   imports: [
-    NgClass,
     MatCard,
     MatCardHeader,
     MatCardTitle,

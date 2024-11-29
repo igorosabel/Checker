@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -35,7 +34,6 @@ import { CustomDateAdapter } from '@shared/custom-date-adapter';
 @Component({
   selector: 'app-checkins-filters',
   imports: [
-    NgClass,
     MatCard,
     MatCardHeader,
     MatCardTitle,

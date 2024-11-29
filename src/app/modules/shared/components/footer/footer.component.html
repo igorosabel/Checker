@@ -2,7 +2,7 @@
              class="footer">
     <button mat-icon-button
             routerLink="/home">
-        <mat-icon [ngClass]="{'selected': selected() === 'home'}">fact_check</mat-icon>
+        <mat-icon [class]="{'selected': selected() === 'home'}">fact_check</mat-icon>
     </button>
 
     <button mat-fab
@@ -14,7 +14,7 @@
 
     <button mat-icon-button
             routerLink="/map">
-        <mat-icon [ngClass]="{'selected': selected() === 'map'}">room</mat-icon>
+        <mat-icon [class]="{'selected': selected() === 'map'}">room</mat-icon>
     </button>
 </mat-toolbar>
 <app-checkin #c

@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -36,7 +35,6 @@ import { UserService } from '@services/user.service';
 @Component({
   selector: 'app-checkin',
   imports: [
-    NgClass,
     MatCard,
     MatCardHeader,
     MatCardTitle,
