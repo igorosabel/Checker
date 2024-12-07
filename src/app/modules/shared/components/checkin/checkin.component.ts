@@ -174,13 +174,13 @@ export default class CheckinComponent implements OnInit {
 
   onPhotoChange(ev: Event): void {
     const reader: FileReader = new FileReader();
-    const files: FileList | null = (<HTMLInputElement>ev.target).files;
+    const files: FileList | null = (ev.target as HTMLInputElement).files;
     if (files !== null && files.length > 0) {
       const file = files[0];
       reader.readAsDataURL(file);
       reader.onload = (): void => {
         this.selectedCheckin.photo = reader.result as string;
-        (<HTMLInputElement>document.getElementById('photo-file')).value = '';
+        (document.getElementById('photo-file') as HTMLInputElement).value = '';
       };
     }
   }
