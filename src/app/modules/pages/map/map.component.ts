@@ -34,7 +34,7 @@ import CheckinsFiltersComponent from '@shared/components/checkins-filters/checki
 import FooterComponent from '@shared/components/footer/footer.component';
 import HeaderComponent from '@shared/components/header/header.component';
 import MenuComponent from '@shared/components/menu/menu.component';
-import { Feature, MapBrowserEvent } from 'ol';
+import { Feature } from 'ol';
 import { FeatureLike } from 'ol/Feature';
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -143,7 +143,7 @@ export default class MapComponent implements OnInit {
     });
     this.mapView.setCenter(centerCoordinates);
 
-    this.map.on('click', (evt: MapBrowserEvent<UIEvent>): void => {
+    this.map.on('singleclick', (evt): void => {
       const feature: FeatureLike | undefined = this.map?.forEachFeatureAtPixel(
         evt.pixel,
         (feat: FeatureLike): FeatureLike => {

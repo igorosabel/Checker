@@ -93,24 +93,34 @@ export default class LoginComponent implements OnInit {
 
     if (this.checkValidations()) {
       this.loading.set(true);
-      this.as.login(this.loginData).subscribe((result: LoginResult): void => {
-        this.loading.set(false);
-        if (result.status === 'ok') {
-          this.us.logged = true;
-          this.us.user = this.cms.getUser(result.user);
-          this.us.checkinTypeList.set(
-            this.cms.getCheckinTypes(result.checkinTypeList)
-          );
-          this.us.saveLogin();
-          this.router.navigate(['/home']);
-        }
-        if (result.status === 'error') {
+      this.as.login(this.loginData).subscribe({
+        next: (result: LoginResult): void => {
+          this.loading.set(false);
+          if (result.status === 'ok') {
+            this.us.logged = true;
+            this.us.user = this.cms.getUser(result.user);
+            this.us.checkinTypeList.set(
+              this.cms.getCheckinTypes(result.checkinTypeList)
+            );
+            this.us.saveLogin();
+            this.router.navigate(['/home']);
+          }
+          if (result.status === 'error') {
+            this.ds.alert({
+              title: 'Error',
+              content: 'Nombre de usuario o contraseña incorrectos.',
+              ok: 'Continuar',
+            });
+          }
+        },
+        error: (): void => {
+          this.loading.set(false);
           this.ds.alert({
             title: 'Error',
-            content: 'Nombre de usuario o contraseña incorrectos.',
+            content: 'Ocurrió un error, vuelvelo a intentarlo más tarde.',
             ok: 'Continuar',
           });
-        }
+        },
       });
     }
   }
