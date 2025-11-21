@@ -1,13 +1,16 @@
-import { Component, OnInit, Signal, inject, viewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Signal,
+  WritableSignal,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { MatFabButton, MatIconButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
-import {
-  MatList,
-  MatListItem,
-  MatListItemLine,
-  MatListItemTitle,
-} from '@angular/material/list';
+import { MatList, MatListItem, MatListItemLine, MatListItemTitle } from '@angular/material/list';
 import { UserService } from '@app/services/user.service';
 import { CheckinTypesResult } from '@interfaces/checkins.interfaces';
 import { StatusResult } from '@interfaces/interfaces';
@@ -42,9 +45,8 @@ export default class CheckinTypesComponent implements OnInit {
   cms: ClassMapperService = inject(ClassMapperService);
   ds: DialogService = inject(DialogService);
 
-  checkinTypes: CheckinType[] = [];
-  ct: Signal<CheckinTypeComponent> =
-    viewChild.required<CheckinTypeComponent>('ct');
+  checkinTypes: WritableSignal<CheckinType[]> = signal<CheckinType[]>([]);
+  ct: Signal<CheckinTypeComponent> = viewChild.required<CheckinTypeComponent>('ct');
 
   ngOnInit(): void {
     this.loadCheckinTypes();
@@ -52,8 +54,8 @@ export default class CheckinTypesComponent implements OnInit {
 
   loadCheckinTypes(): void {
     this.as.getCheckinTypes().subscribe((result: CheckinTypesResult): void => {
-      this.checkinTypes = this.cms.getCheckinTypes(result.list);
-      this.us.checkinTypeList.set(this.checkinTypes);
+      this.checkinTypes.set(this.cms.getCheckinTypes(result.list));
+      this.us.checkinTypeList.set(this.checkinTypes());
       this.us.saveLogin();
     });
   }
@@ -91,8 +93,7 @@ export default class CheckinTypesComponent implements OnInit {
         this.ds
           .alert({
             title: 'Tipo de Checkin borrado',
-            content:
-              'El tipo de Checkin y todos sus Checkins asociados han sido borrados.',
+            content: 'El tipo de Checkin y todos sus Checkins asociados han sido borrados.',
             ok: 'Continuar',
           })
           .subscribe((): void => {

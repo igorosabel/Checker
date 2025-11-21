@@ -4,8 +4,8 @@
 <mat-card class="card-center">
     <mat-card-content>
         <mat-list>
-            @if (checkinTypes.length > 0) {
-            @for (ct of checkinTypes; track ct.id) {
+            @if (checkinTypes().length > 0) {
+            @for (ct of checkinTypes(); track ct.id) {
             <mat-list-item>
                 <span matListItemTitle>
                     <mat-icon>{{ct.icon}}</mat-icon>

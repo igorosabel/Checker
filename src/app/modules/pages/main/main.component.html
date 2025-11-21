@@ -23,8 +23,8 @@
             </mat-card-header>
             <mat-card-content>
                 <mat-action-list>
-                    @if (checkins.length > 0) {
-                    @for (c of checkins; track c.id) {
+                    @if (checkins().length > 0) {
+                    @for (c of checkins(); track c.id) {
                     <button mat-list-item
                             (click)="openDetail(c)">
                         <span matListItemTitle>
@@ -57,7 +57,7 @@
                 </mat-action-list>
             </mat-card-content>
             <mat-card-actions align="end">
-                {{checkins.length}} / {{total}}
+                {{checkins().length}} / {{total}}
             </mat-card-actions>
         </mat-card>
 
