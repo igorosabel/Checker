@@ -1,8 +1,8 @@
 import { CheckinTypeInterface } from '@interfaces/checkins.interfaces';
 
 export interface LoginData {
-  name: string | null;
-  pass: string | null;
+  name: string;
+  pass: string;
 }
 
 export interface LoginValidation {

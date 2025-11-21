@@ -10,25 +10,21 @@
                 <mat-form-field>
                     <mat-label>Usuario</mat-label>
                     <input matInput
-                           [(ngModel)]="loginData.name"
-                           name="name"
+                           [field]="loginForm.name"
                            autocorrect="off"
                            autocapitalize="off"
-                           autocomplete="username"
-                           required>
-                    @if (validation.name) {
+                           autocomplete="username">
+                    @if ((loginForm.name().touched() || submitted()) && loginForm.name().invalid()) {
                     <mat-hint class="field-error">El nombre de usuario es obligatorio.</mat-hint>
                     }
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Contraseña</mat-label>
                     <input matInput
-                           [(ngModel)]="loginData.pass"
-                           name="pass"
+                           [field]="loginForm.pass"
                            type="password"
-                           autocomplete="current-password"
-                           required>
-                    @if (validation.pass) {
+                           autocomplete="current-password">
+                    @if ((loginForm.name().touched() || submitted()) && loginForm.name().invalid()) {
                     <mat-hint class="field-error">La contraseña es obligatoria.</mat-hint>
                     }
                 </mat-form-field>
