@@ -8,10 +8,7 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
-const ResponseInterceptor: HttpInterceptorFn = (
-  req: HttpRequest<unknown>,
-  next: HttpHandlerFn
-) => {
+const ResponseInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const router: Router = inject(Router);
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -25,4 +22,5 @@ const ResponseInterceptor: HttpInterceptorFn = (
     })
   );
 };
+
 export default ResponseInterceptor;

@@ -17,12 +17,12 @@ import {
   MatCardTitle,
 } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
-import { StatusResult } from '@app/interfaces/interfaces';
-import { ApiService } from '@app/services/api.service';
-import { UserService } from '@app/services/user.service';
-import { Checkin } from '@model/checkin.model';
-import { CheckinType } from '@model/checkintype.model';
+import { StatusResult } from '@interfaces/interfaces';
+import Checkin from '@model/checkin.model';
+import CheckinType from '@model/checkintype.model';
 import { DialogService } from '@osumi/angular-tools';
+import ApiService from '@services/api.service';
+import UserService from '@services/user.service';
 
 @Component({
   selector: 'app-checkin-detail',
@@ -40,9 +40,9 @@ import { DialogService } from '@osumi/angular-tools';
   styleUrl: './checkin-detail.component.scss',
 })
 export default class CheckinDetailComponent implements OnInit {
-  us: UserService = inject(UserService);
-  ds: DialogService = inject(DialogService);
-  as: ApiService = inject(ApiService);
+  private readonly us: UserService = inject(UserService);
+  private readonly ds: DialogService = inject(DialogService);
+  private readonly as: ApiService = inject(ApiService);
 
   // https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=600&height=400&center=lonlat:-2.938149,43.252342&zoom=15.1&marker=lonlat:-2.9382791346525323,43.25256072882107;color:%23ff0000;size:medium;text:A&apiKey=YOUR_API_KEY
   // https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=600&height=400&center=lonlat:-2.938149,43.252342&zoom=15.1&marker=lonlat:-2.9382791346525323,43.25256072882107;color:%23ff0000;size:medium;text:A|lonlat:-2.9356564208548264,43.253493962965564;color:%23ff0000;size:medium;text:B&apiKey=ccb2447acbd8411ca67c538de4930cf5
@@ -60,11 +60,9 @@ export default class CheckinDetailComponent implements OnInit {
 
   load(c: Checkin): void {
     this.selectedCheckin = c;
-    const ind: number = this.checkinTypeList.findIndex(
-      (ct: CheckinType): boolean => {
-        return ct.id === c.idType;
-      }
-    );
+    const ind: number = this.checkinTypeList.findIndex((ct: CheckinType): boolean => {
+      return ct.id === c.idType;
+    });
     if (ind !== -1) {
       this.selectedCT = this.checkinTypeList[ind];
     }
@@ -92,14 +90,12 @@ export default class CheckinDetailComponent implements OnInit {
 
   confirmDeleteCheckin(): void {
     if (this.selectedCheckin.id !== null) {
-      this.as
-        .deleteCheckin(this.selectedCheckin.id)
-        .subscribe((result: StatusResult): void => {
-          if (result.status === 'ok') {
-            this.checkinDeleted.emit();
-            this.closeModal();
-          }
-        });
+      this.as.deleteCheckin(this.selectedCheckin.id).subscribe((result: StatusResult): void => {
+        if (result.status === 'ok') {
+          this.checkinDeleted.emit();
+          this.closeModal();
+        }
+      });
     }
   }
 }

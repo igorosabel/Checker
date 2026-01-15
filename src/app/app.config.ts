@@ -23,10 +23,10 @@ import {
   withInMemoryScrolling,
   withViewTransitions,
 } from '@angular/router';
-import ResponseInterceptor from '@app/interceptors/response.interceptor';
-import TokenInterceptor from '@app/interceptors/token.interceptor';
+import { routes } from '@app/app.routes';
+import ResponseInterceptor from '@interceptors/response.interceptor';
+import TokenInterceptor from '@interceptors/token.interceptor';
 import provideCore from '@modules/core';
-import { routes } from './app.routes';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline',
@@ -45,7 +45,7 @@ export const CUSTOM_DATE_FORMATS: MatDateFormats = {
   },
 };
 
-export const appConfig: ApplicationConfig = {
+const appConfig: ApplicationConfig = {
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: appearance },
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
@@ -59,10 +59,10 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
     ),
-    provideHttpClient(
-      withInterceptors([TokenInterceptor, ResponseInterceptor])
-    ),
+    provideHttpClient(withInterceptors([TokenInterceptor, ResponseInterceptor])),
     provideNativeDateAdapter(),
     provideCore(),
   ],
 };
+
+export default appConfig;

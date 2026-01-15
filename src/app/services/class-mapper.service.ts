@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
-import {
-  CheckinInterface,
-  CheckinTypeInterface,
-} from '@interfaces/checkins.interfaces';
+import { CheckinInterface, CheckinTypeInterface } from '@interfaces/checkins.interfaces';
 import { UserInterface } from '@interfaces/user.interfaces';
-import { Checkin } from '@model/checkin.model';
-import { CheckinType } from '@model/checkintype.model';
-import { User } from '@model/user.model';
+import Checkin from '@model/checkin.model';
+import CheckinType from '@model/checkintype.model';
+import User from '@model/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClassMapperService {
+export default class ClassMapperService {
   getUser(u: UserInterface): User {
     return new User().fromInterface(u);
   }

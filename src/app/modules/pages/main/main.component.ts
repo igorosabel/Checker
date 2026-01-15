@@ -25,11 +25,11 @@ import {
 } from '@angular/material/list';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { CheckinsFiltersInterface, CheckinsResult } from '@interfaces/checkins.interfaces';
-import { Checkin } from '@model/checkin.model';
-import { CheckinType } from '@model/checkintype.model';
-import { ApiService } from '@services/api.service';
-import { ClassMapperService } from '@services/class-mapper.service';
-import { UserService } from '@services/user.service';
+import Checkin from '@model/checkin.model';
+import CheckinType from '@model/checkintype.model';
+import ApiService from '@services/api.service';
+import ClassMapperService from '@services/class-mapper.service';
+import UserService from '@services/user.service';
 import CheckinDetailComponent from '@shared/components/checkin-detail/checkin-detail.component';
 import CheckinsFiltersComponent from '@shared/components/checkins-filters/checkins-filters.component';
 import FooterComponent from '@shared/components/footer/footer.component';
@@ -64,9 +64,9 @@ import MenuComponent from '@shared/components/menu/menu.component';
   styleUrl: './main.component.scss',
 })
 export default class MainComponent implements OnInit {
-  as: ApiService = inject(ApiService);
-  cms: ClassMapperService = inject(ClassMapperService);
-  us: UserService = inject(UserService);
+  private readonly as: ApiService = inject(ApiService);
+  private readonly cms: ClassMapperService = inject(ClassMapperService);
+  private readonly us: UserService = inject(UserService);
 
   opened: boolean = false;
   sidenav: Signal<MatSidenav> = viewChild.required('sidenav');

@@ -1,11 +1,6 @@
-import {
-  HttpEvent,
-  HttpHandlerFn,
-  HttpInterceptorFn,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { UserService } from '@services/user.service';
+import UserService from '@services/user.service';
 import { Observable } from 'rxjs';
 
 const TokenInterceptor: HttpInterceptorFn = (
@@ -22,4 +17,5 @@ const TokenInterceptor: HttpInterceptorFn = (
 
   return next(req);
 };
+
 export default TokenInterceptor;

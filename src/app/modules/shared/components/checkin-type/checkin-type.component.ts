@@ -23,9 +23,9 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { StatusResult } from '@interfaces/interfaces';
-import { CheckinType } from '@model/checkintype.model';
+import CheckinType from '@model/checkintype.model';
 import { DialogService } from '@osumi/angular-tools';
-import { ApiService } from '@services/api.service';
+import ApiService from '@services/api.service';
 
 @Component({
   selector: 'app-checkin-type',
@@ -49,8 +49,8 @@ import { ApiService } from '@services/api.service';
   styleUrl: './checkin-type.component.scss',
 })
 export default class CheckinTypeComponent {
-  as: ApiService = inject(ApiService);
-  ds: DialogService = inject(DialogService);
+  private readonly as: ApiService = inject(ApiService);
+  private readonly ds: DialogService = inject(DialogService);
 
   showModal: WritableSignal<boolean> = signal<boolean>(false);
   modalTitle: string = '';
@@ -79,10 +79,7 @@ export default class CheckinTypeComponent {
 
   checkForm(): void {
     this.checkinTypeValidName = true;
-    if (
-      this.selectedCheckinType.name === null ||
-      this.selectedCheckinType.name === ''
-    ) {
+    if (this.selectedCheckinType.name === null || this.selectedCheckinType.name === '') {
       this.checkinTypeValidName = false;
       return;
     }

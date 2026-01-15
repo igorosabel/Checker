@@ -1,6 +1,6 @@
 import { Component, computed, inject, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { disabled, Field, form, required } from '@angular/forms/signals';
+import { disabled, form, FormField, required } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import {
   MatCard,
@@ -14,9 +14,9 @@ import { MatInput } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { LoginData, LoginResult } from '@interfaces/user.interfaces';
 import { DialogService } from '@osumi/angular-tools';
-import { ApiService } from '@services/api.service';
-import { ClassMapperService } from '@services/class-mapper.service';
-import { UserService } from '@services/user.service';
+import ApiService from '@services/api.service';
+import ClassMapperService from '@services/class-mapper.service';
+import UserService from '@services/user.service';
 import HeaderComponent from '@shared/components/header/header.component';
 
 @Component({
@@ -35,17 +35,17 @@ import HeaderComponent from '@shared/components/header/header.component';
     FormsModule,
     RouterLink,
     MatButton,
-    Field,
+    FormField,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export default class LoginComponent implements OnInit {
-  as: ApiService = inject(ApiService);
-  us: UserService = inject(UserService);
-  cms: ClassMapperService = inject(ClassMapperService);
-  ds: DialogService = inject(DialogService);
-  router: Router = inject(Router);
+  private readonly as: ApiService = inject(ApiService);
+  private readonly us: UserService = inject(UserService);
+  private readonly cms: ClassMapperService = inject(ClassMapperService);
+  private readonly ds: DialogService = inject(DialogService);
+  private readonly router: Router = inject(Router);
 
   loginModel: WritableSignal<LoginData> = signal<LoginData>({
     name: '',

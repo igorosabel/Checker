@@ -1,9 +1,9 @@
 import { environment } from '@env/environment';
 import { CheckinInterface } from '@interfaces/checkins.interfaces';
+import CheckinType from '@model/checkintype.model';
 import { urldecode, urlencode } from '@osumi/tools';
-import { CheckinType } from './checkintype.model';
 
-export class Checkin {
+export default class Checkin {
   photo: string | null = null;
   ct: CheckinType | null = null;
   letter: string | null = null;
@@ -24,9 +24,9 @@ export class Checkin {
       this.locationLon
     },${this.locationLat}&zoom=15.1&marker=lonlat:${this.locationLon},${
       this.locationLat
-    };color:%23ff0000;size:medium;text:${
-      this.letter !== null ? this.letter : 'A'
-    }&apiKey=${environment.geoapifyApiKey}`;
+    };color:%23ff0000;size:medium;text:${this.letter !== null ? this.letter : 'A'}&apiKey=${
+      environment.geoapifyApiKey
+    }`;
   }
 
   get photoUrl(): string | null {

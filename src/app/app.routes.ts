@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { isLoggedGuardFn } from '@app/guard/auth.guard.fn';
+import isLoggedGuardFn from '@guard/auth.guard.fn';
 import LoginComponent from '@pages/login/login.component';
 
 export const routes: Routes = [

@@ -1,13 +1,15 @@
 import { Injectable, WritableSignal, inject, signal } from '@angular/core';
-import { CheckinTypeInterface } from '@app/interfaces/checkins.interfaces';
+import { CheckinTypeInterface } from '@interfaces/checkins.interfaces';
 import { LoginResult } from '@interfaces/user.interfaces';
-import { CheckinType } from '@model/checkintype.model';
-import { User } from '@model/user.model';
-import { ClassMapperService } from '@services/class-mapper.service';
+import CheckinType from '@model/checkintype.model';
+import User from '@model/user.model';
+import ClassMapperService from '@services/class-mapper.service';
 
-@Injectable()
-export class UserService {
-  cms: ClassMapperService = inject(ClassMapperService);
+@Injectable({
+  providedIn: 'root',
+})
+export default class UserService {
+  private readonly cms: ClassMapperService = inject(ClassMapperService);
 
   logged: boolean = false;
   user: User | null = null;
@@ -26,9 +28,7 @@ export class UserService {
     }
     this.logged = true;
     this.user = this.cms.getUser(loginObj.user);
-    this.checkinTypeList.set(
-      this.cms.getCheckinTypes(loginObj.checkinTypeList)
-    );
+    this.checkinTypeList.set(this.cms.getCheckinTypes(loginObj.checkinTypeList));
   }
 
   saveLogin(): void {
@@ -38,11 +38,9 @@ export class UserService {
     const loginObj: LoginResult = {
       status: 'ok',
       user: this.user.toInterface(),
-      checkinTypeList: this.checkinTypeList().map(
-        (ct: CheckinType): CheckinTypeInterface => {
-          return ct.toInterface();
-        }
-      ),
+      checkinTypeList: this.checkinTypeList().map((ct: CheckinType): CheckinTypeInterface => {
+        return ct.toInterface();
+      }),
     };
     localStorage.setItem('login', JSON.stringify(loginObj));
   }

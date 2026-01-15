@@ -10,7 +10,7 @@
                 <mat-form-field>
                     <mat-label>Usuario</mat-label>
                     <input matInput
-                           [field]="loginForm.name"
+                           [formField]="loginForm.name"
                            autocorrect="off"
                            autocapitalize="off"
                            autocomplete="username">
@@ -21,7 +21,7 @@
                 <mat-form-field>
                     <mat-label>Contraseña</mat-label>
                     <input matInput
-                           [field]="loginForm.pass"
+                           [formField]="loginForm.pass"
                            type="password"
                            autocomplete="current-password">
                     @if ((loginForm.name().touched() || submitted()) && loginForm.name().invalid()) {

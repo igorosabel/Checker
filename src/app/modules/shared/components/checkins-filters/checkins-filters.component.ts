@@ -18,18 +18,14 @@ import {
 } from '@angular/material/card';
 import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {
-  MatFormField,
-  MatLabel,
-  MatSuffix,
-} from '@angular/material/form-field';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { CheckinsFiltersInterface } from '@interfaces/checkins.interfaces';
-import { CheckinType } from '@model/checkintype.model';
-import { UserService } from '@services/user.service';
-import { CustomDateAdapter } from '@shared/custom-date-adapter';
+import CheckinType from '@model/checkintype.model';
+import UserService from '@services/user.service';
+import CustomDateAdapter from '@shared/custom-date-adapter';
 
 @Component({
   selector: 'app-checkins-filters',
@@ -57,7 +53,7 @@ import { CustomDateAdapter } from '@shared/custom-date-adapter';
   styleUrl: './checkins-filters.component.scss',
 })
 export default class CheckinsFiltersComponent implements OnInit {
-  us: UserService = inject(UserService);
+  private readonly us: UserService = inject(UserService);
 
   showModal: WritableSignal<boolean> = signal<boolean>(false);
   checkinTypeList: CheckinType[] = [];
@@ -68,8 +64,7 @@ export default class CheckinsFiltersComponent implements OnInit {
     page: 1,
   };
 
-  filtersChanged: OutputEmitterRef<CheckinsFiltersInterface> =
-    output<CheckinsFiltersInterface>();
+  filtersChanged: OutputEmitterRef<CheckinsFiltersInterface> = output<CheckinsFiltersInterface>();
 
   ngOnInit(): void {
     this.checkinTypeList = this.us.checkinTypeList();

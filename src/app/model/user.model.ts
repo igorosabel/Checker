@@ -1,7 +1,7 @@
 import { UserInterface } from '@interfaces/user.interfaces';
 import { urldecode, urlencode } from '@osumi/tools';
 
-export class User {
+export default class User {
   constructor(
     public id: number | null = null,
     public name: string | null = null,

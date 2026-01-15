@@ -1,7 +1,7 @@
 import { CheckinTypeInterface } from '@interfaces/checkins.interfaces';
 import { urldecode, urlencode } from '@osumi/tools';
 
-export class CheckinType {
+export default class CheckinType {
   constructor(
     public id: number | null = null,
     public name: string | null = null,

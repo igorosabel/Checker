@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  WritableSignal,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import {
@@ -16,12 +10,12 @@ import {
 } from '@angular/material/card';
 import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { StatusResult } from '@app/interfaces/interfaces';
+import { StatusResult } from '@interfaces/interfaces';
 import { RegisterData, RegisterValidation } from '@interfaces/user.interfaces';
 import { DialogService } from '@osumi/angular-tools';
 import { validateEmail } from '@osumi/tools';
-import { ApiService } from '@services/api.service';
-import { UserService } from '@services/user.service';
+import ApiService from '@services/api.service';
+import UserService from '@services/user.service';
 import HeaderComponent from '@shared/components/header/header.component';
 
 @Component({
@@ -44,9 +38,9 @@ import HeaderComponent from '@shared/components/header/header.component';
   styleUrl: './profile.component.scss',
 })
 export default class ProfileComponent implements OnInit {
-  us: UserService = inject(UserService);
-  as: ApiService = inject(ApiService);
-  ds: DialogService = inject(DialogService);
+  private readonly us: UserService = inject(UserService);
+  private readonly as: ApiService = inject(ApiService);
+  private readonly ds: DialogService = inject(DialogService);
 
   profileData: RegisterData = {
     name: null,
@@ -100,10 +94,7 @@ export default class ProfileComponent implements OnInit {
     if (!this.profileData.email) {
       this.validation.email = true;
     }
-    if (
-      this.profileData.email !== null &&
-      !validateEmail(this.profileData.email)
-    ) {
+    if (this.profileData.email !== null && !validateEmail(this.profileData.email)) {
       this.validation.emailFormat = true;
     }
     if (this.profileData.conf && !this.profileData.pass) {
@@ -121,42 +112,40 @@ export default class ProfileComponent implements OnInit {
 
     if (this.checkValidations()) {
       this.loading.set(true);
-      this.as
-        .updateProfile(this.profileData)
-        .subscribe((result: StatusResult): void => {
-          this.loading.set(false);
-          if (result.status === 'ok' && this.us.user !== null) {
-            this.us.user.name = this.profileData.name;
-            this.us.user.email = this.profileData.email;
-            this.us.saveLogin();
-            this.ds.alert({
-              title: 'Datos guardados',
-              content: 'Datos del perfil actualizados.',
-              ok: 'Continuar',
-            });
-          }
-          if (result.status === 'error-email') {
-            this.ds.alert({
-              title: 'Error',
-              content: 'El email introducido ya está en uso.',
-              ok: 'Continuar',
-            });
-          }
-          if (result.status === 'error-name') {
-            this.ds.alert({
-              title: 'Error',
-              content: 'El usuario introducido ya está en uso.',
-              ok: 'Continuar',
-            });
-          }
-          if (result.status === 'error') {
-            this.ds.alert({
-              title: 'Error',
-              content: 'Ocurrió un error al guardar los datos.',
-              ok: 'Continuar',
-            });
-          }
-        });
+      this.as.updateProfile(this.profileData).subscribe((result: StatusResult): void => {
+        this.loading.set(false);
+        if (result.status === 'ok' && this.us.user !== null) {
+          this.us.user.name = this.profileData.name;
+          this.us.user.email = this.profileData.email;
+          this.us.saveLogin();
+          this.ds.alert({
+            title: 'Datos guardados',
+            content: 'Datos del perfil actualizados.',
+            ok: 'Continuar',
+          });
+        }
+        if (result.status === 'error-email') {
+          this.ds.alert({
+            title: 'Error',
+            content: 'El email introducido ya está en uso.',
+            ok: 'Continuar',
+          });
+        }
+        if (result.status === 'error-name') {
+          this.ds.alert({
+            title: 'Error',
+            content: 'El usuario introducido ya está en uso.',
+            ok: 'Continuar',
+          });
+        }
+        if (result.status === 'error') {
+          this.ds.alert({
+            title: 'Error',
+            content: 'Ocurrió un error al guardar los datos.',
+            ok: 'Continuar',
+          });
+        }
+      });
     }
   }
 }

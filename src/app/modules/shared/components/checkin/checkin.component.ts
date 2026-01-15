@@ -18,19 +18,14 @@ import {
 } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatHint, MatInput } from '@angular/material/input';
-import {
-  MatFormField,
-  MatLabel,
-  MatOption,
-  MatSelect,
-} from '@angular/material/select';
-import { StatusResult } from '@app/interfaces/interfaces';
-import { ApiService } from '@app/services/api.service';
-import { Checkin } from '@model/checkin.model';
-import { CheckinType } from '@model/checkintype.model';
+import { MatFormField, MatLabel, MatOption, MatSelect } from '@angular/material/select';
+import { StatusResult } from '@interfaces/interfaces';
+import Checkin from '@model/checkin.model';
+import CheckinType from '@model/checkintype.model';
 import { DialogService } from '@osumi/angular-tools';
 import { getDate, getDateFromString } from '@osumi/tools';
-import { UserService } from '@services/user.service';
+import ApiService from '@services/api.service';
+import UserService from '@services/user.service';
 
 @Component({
   selector: 'app-checkin',
@@ -55,9 +50,9 @@ import { UserService } from '@services/user.service';
   styleUrl: './checkin.component.scss',
 })
 export default class CheckinComponent implements OnInit {
-  us: UserService = inject(UserService);
-  ds: DialogService = inject(DialogService);
-  as: ApiService = inject(ApiService);
+  private readonly us: UserService = inject(UserService);
+  private readonly ds: DialogService = inject(DialogService);
+  private readonly as: ApiService = inject(ApiService);
 
   checkinTypeList: CheckinType[] = [];
   selectedCT: CheckinType | null = null;
@@ -117,11 +112,9 @@ export default class CheckinComponent implements OnInit {
   }
 
   updateSelectedCT(): void {
-    const ind: number = this.checkinTypeList.findIndex(
-      (ct: CheckinType): boolean => {
-        return ct.id === this.selectedCheckin.idType;
-      }
-    );
+    const ind: number = this.checkinTypeList.findIndex((ct: CheckinType): boolean => {
+      return ct.id === this.selectedCheckin.idType;
+    });
     this.selectedCT = ind !== -1 ? this.checkinTypeList[ind] : null;
   }
 
@@ -202,23 +195,18 @@ export default class CheckinComponent implements OnInit {
       .subscribe((result: StatusResult): void => {
         this.loading.set(false);
         if (result.status === 'ok') {
-          this.us.checkinTypeList.update(
-            (value: CheckinType[]): CheckinType[] => {
-              const ind: number = value.findIndex(
-                (ct: CheckinType): boolean => {
-                  return ct.id === this.selectedCheckin.idType;
-                }
-              );
-              value[ind].num =
-                value[ind].num === null ? 1 : (value[ind].num ?? 0) + 1;
+          this.us.checkinTypeList.update((value: CheckinType[]): CheckinType[] => {
+            const ind: number = value.findIndex((ct: CheckinType): boolean => {
+              return ct.id === this.selectedCheckin.idType;
+            });
+            value[ind].num = value[ind].num === null ? 1 : (value[ind].num ?? 0) + 1;
 
-              value[ind].lastUsed = getDate({
-                date: new Date(),
-                withHours: true,
-              });
-              return value;
-            }
-          );
+            value[ind].lastUsed = getDate({
+              date: new Date(),
+              withHours: true,
+            });
+            return value;
+          });
           this.ds
             .alert({
               title: 'Datos guardados',

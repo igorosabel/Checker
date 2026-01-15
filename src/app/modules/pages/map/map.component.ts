@@ -15,20 +15,13 @@ import {
   MatListItemMeta,
   MatListItemTitle,
 } from '@angular/material/list';
-import {
-  MatSidenav,
-  MatSidenavContainer,
-  MatSidenavContent,
-} from '@angular/material/sidenav';
-import {
-  CheckinsFiltersInterface,
-  CheckinsResult,
-} from '@interfaces/checkins.interfaces';
-import { Checkin } from '@model/checkin.model';
-import { CheckinType } from '@model/checkintype.model';
-import { ApiService } from '@services/api.service';
-import { ClassMapperService } from '@services/class-mapper.service';
-import { UserService } from '@services/user.service';
+import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
+import { CheckinsFiltersInterface, CheckinsResult } from '@interfaces/checkins.interfaces';
+import Checkin from '@model/checkin.model';
+import CheckinType from '@model/checkintype.model';
+import ApiService from '@services/api.service';
+import ClassMapperService from '@services/class-mapper.service';
+import UserService from '@services/user.service';
 import CheckinDetailComponent from '@shared/components/checkin-detail/checkin-detail.component';
 import CheckinsFiltersComponent from '@shared/components/checkins-filters/checkins-filters.component';
 import FooterComponent from '@shared/components/footer/footer.component';
@@ -78,9 +71,9 @@ import Text from 'ol/style/Text';
   styleUrl: './map.component.scss',
 })
 export default class MapComponent implements OnInit {
-  as: ApiService = inject(ApiService);
-  cms: ClassMapperService = inject(ClassMapperService);
-  us: UserService = inject(UserService);
+  private readonly as: ApiService = inject(ApiService);
+  private readonly cms: ClassMapperService = inject(ClassMapperService);
+  private readonly us: UserService = inject(UserService);
 
   map: Map | null = null;
   mapView: View = new View({
@@ -104,8 +97,7 @@ export default class MapComponent implements OnInit {
     page: 1,
   };
   total: number = 0;
-  detail: Signal<CheckinDetailComponent> =
-    viewChild.required<CheckinDetailComponent>('detail');
+  detail: Signal<CheckinDetailComponent> = viewChild.required<CheckinDetailComponent>('detail');
 
   checkinTypes: CheckinType[] = [];
   checkins: Checkin[] = [];
@@ -152,11 +144,9 @@ export default class MapComponent implements OnInit {
       );
       if (feature) {
         const id: number = feature.get('checkin-id');
-        const c: Checkin | undefined = this.checkins.find(
-          (c: Checkin): boolean => {
-            return c.id === id;
-          }
-        );
+        const c: Checkin | undefined = this.checkins.find((c: Checkin): boolean => {
+          return c.id === id;
+        });
         if (c !== undefined) {
           this.openDetail(c);
         }
@@ -172,10 +162,7 @@ export default class MapComponent implements OnInit {
 
   addMarker(c: Checkin): void {
     // Coordenadas del marcador
-    const markerCoordinates: Coordinate = fromLonLat([
-      c.locationLon!,
-      c.locationLat!,
-    ]);
+    const markerCoordinates: Coordinate = fromLonLat([c.locationLon!, c.locationLat!]);
     const markerFeature = new Feature({
       geometry: new Point(markerCoordinates),
     });
@@ -205,25 +192,21 @@ export default class MapComponent implements OnInit {
   }
 
   loadCheckins(): void {
-    this.as
-      .getCheckins(this.checkinFilters)
-      .subscribe((result: CheckinsResult): void => {
-        const checkins: Checkin[] = this.cms.getCheckins(result.list);
-        for (const c of checkins) {
-          const ind: number = this.checkinTypes.findIndex(
-            (ct: CheckinType): boolean => {
-              return ct.id === c.idType;
-            }
-          );
-          c.ct = this.checkinTypes[ind];
-          if (c.locationLat !== null && c.locationLon !== null) {
-            c.letter = this.getLetter();
-          }
+    this.as.getCheckins(this.checkinFilters).subscribe((result: CheckinsResult): void => {
+      const checkins: Checkin[] = this.cms.getCheckins(result.list);
+      for (const c of checkins) {
+        const ind: number = this.checkinTypes.findIndex((ct: CheckinType): boolean => {
+          return ct.id === c.idType;
+        });
+        c.ct = this.checkinTypes[ind];
+        if (c.locationLat !== null && c.locationLon !== null) {
+          c.letter = this.getLetter();
         }
-        this.checkins = [...this.checkins, ...checkins];
-        this.total = result.total;
-        this.updateMap();
-      });
+      }
+      this.checkins = [...this.checkins, ...checkins];
+      this.total = result.total;
+      this.updateMap();
+    });
   }
 
   getLetter(): string {
@@ -267,10 +250,7 @@ export default class MapComponent implements OnInit {
 
   openDetail(c: Checkin): void {
     if (c.locationLat !== null && c.locationLon) {
-      const centerCoordinates: Coordinate = fromLonLat([
-        c.locationLon,
-        c.locationLat,
-      ]);
+      const centerCoordinates: Coordinate = fromLonLat([c.locationLon, c.locationLat]);
       this.mapView.animate({
         center: centerCoordinates,
         duration: 2000,

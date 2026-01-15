@@ -11,13 +11,13 @@ import { MatFabButton, MatIconButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatList, MatListItem, MatListItemLine, MatListItemTitle } from '@angular/material/list';
-import { UserService } from '@app/services/user.service';
 import { CheckinTypesResult } from '@interfaces/checkins.interfaces';
 import { StatusResult } from '@interfaces/interfaces';
-import { CheckinType } from '@model/checkintype.model';
+import CheckinType from '@model/checkintype.model';
 import { DialogService } from '@osumi/angular-tools';
-import { ApiService } from '@services/api.service';
-import { ClassMapperService } from '@services/class-mapper.service';
+import ApiService from '@services/api.service';
+import ClassMapperService from '@services/class-mapper.service';
+import UserService from '@services/user.service';
 import CheckinTypeComponent from '@shared/components/checkin-type/checkin-type.component';
 import HeaderComponent from '@shared/components/header/header.component';
 
@@ -40,10 +40,10 @@ import HeaderComponent from '@shared/components/header/header.component';
   styleUrl: './checkin-types.component.scss',
 })
 export default class CheckinTypesComponent implements OnInit {
-  us: UserService = inject(UserService);
-  as: ApiService = inject(ApiService);
-  cms: ClassMapperService = inject(ClassMapperService);
-  ds: DialogService = inject(DialogService);
+  private readonly us: UserService = inject(UserService);
+  private readonly as: ApiService = inject(ApiService);
+  private readonly cms: ClassMapperService = inject(ClassMapperService);
+  private readonly ds: DialogService = inject(DialogService);
 
   checkinTypes: WritableSignal<CheckinType[]> = signal<CheckinType[]>([]);
   ct: Signal<CheckinTypeComponent> = viewChild.required<CheckinTypeComponent>('ct');
