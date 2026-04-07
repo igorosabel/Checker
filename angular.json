@@ -21,7 +21,7 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "allowedCommonJsDependencies": ["rbush", "@osumi/tools"],
+            "allowedCommonJsDependencies": ["rbush"],
             "assets": [
               {
                 "glob": "**/*",
